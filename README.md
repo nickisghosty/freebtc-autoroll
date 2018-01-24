@@ -5,4 +5,4 @@ This addon just does fake click on roll (don't work in accounts that have to fil
 
 
 # Usage
-You just need to leave the freebitco.in page open and the addon ON. The addon does a verification every 5 minute
+You just need to leave the freebitco.in page open and the addon ON. The addon does a verification every 2 minute
