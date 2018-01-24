@@ -33,7 +33,7 @@ var rolls = 0;
 var status = false;
 
 // Interval check
-var interval = 5; // minutes
+var interval = 2; // minutes
 
 // Loop check
 setInterval(function(){
