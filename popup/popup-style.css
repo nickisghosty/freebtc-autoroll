@@ -2,7 +2,7 @@
 	margin:0;
 	padding:0;
 	border:0;
-	font-family: Verdana;
+	font-family: Arial, Helvetica, sans-serif;
 }
 p{
 	padding:4px 14px;
@@ -15,6 +15,7 @@ p{
 	font-weight: bold;
 	color:#666;
 	margin-top:10px;
+  text-align: center;
 }
 
 #toggle{
@@ -31,9 +32,16 @@ p{
 	padding-bottom:0;
 	padding-top:10px;
 	font-size:11px;
-  transition: all .2s ease;
+  transition: all .1s ease;
 }
 
+#rolls{
+  text-align: center;
+}
+
+#container{
+  min-width: 150px;
+}
 
 
  /* The switch - the box around the slider */
@@ -56,8 +64,8 @@ p{
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: .1s;
+  transition: .1s;
 }
 
 .slider:before {
@@ -68,8 +76,8 @@ p{
   left: 4px;
   bottom: 4px;
   background-color: white;
-  -webkit-transition: .2s;
-  transition: .2s;
+  -webkit-transition: .1s;
+  transition: .1s;
 }
 
 input:checked + .slider {

@@ -1,10 +1,6 @@
-// Local variable ON/OFF
-var status = localStorage.getItem('status');
-
-// Check box element ON/OFF
 var status_ck = document.getElementById("status_ck");
 
-// Refresh texto ON/OFF
+// Refresh text ON/OFF
 function refreshStatusText(){
 	if (!status_ck.checked){
 		document.getElementById("status").innerHTML = "OFF";
@@ -16,65 +12,25 @@ function refreshStatusText(){
 	}
 }
 
-function sendStatus(){
-	sendData({"status": status}, function(){});
-}
-
-// Checkbox ON/OFF - on change listener 
+// On change status
 status_ck.onchange = function(){
-	status = status_ck.checked;
-	localStorage.setItem('status', status);
+	localStorage.setItem("activate", status_ck.checked?"on":"off");
 
 	refreshStatusText();
-	sendStatus();
 };
 
-// Send data to tab
-function sendData(send, callback){
-	browser.tabs.query({
-		url: "*://*.freebitco.in/*"
-	}).then(function(tabs){
-		for (let tab of tabs) {
-		    browser.tabs.sendMessage(
-		      tab.id,
-		      send
-		    ).then(response => {
-		    	callback(response);
-		    }).catch(function(){
-		    	console.error(`Error: ${error}`);
-		    });
-		  }
-	}).catch(function(error){
-		console.error(`Error: ${error}`);
-	});
+// Refresh data
+function refresh(){
+	document.getElementById("rolls").innerHTML = "Rolls: "+(localStorage.getItem("count") || "0");
+	document.getElementById("balance").innerHTML = (localStorage.getItem("balance") || "0.00000000")+" BTC";
 }
 
-// Get data from tab
-browser.runtime.onMessage.addListener(function(response){
-	if (response.rolls){
-		document.getElementById("rolls").innerHTML = "Rolls: "+response.rolls;
-	}
-	if (response.balance){
-		document.getElementById("balance").innerHTML = response.balance+" BTC";
-	}
-	if (response.status){
-		sendStatus();
-	}
-});
-
-// Get information from tab
-function getInformation(){
-	sendData({data:"start"}, function(response){
-		document.getElementById("rolls").innerHTML = "Rolls: "+response.rolls;
-		document.getElementById("balance").innerHTML = response.balance+" BTC";
-	});
-}
-
-// Refresh information on start
-status_ck.checked = (status=="true"?true:false);
+// Set start values
+status_ck.checked = (localStorage.getItem("activate")=="on"?true:false);
 refreshStatusText();
-sendStatus();
-getInformation();
+refresh();
 
-// Get refreshed information every 1 min
-setInterval(function(){getInformation()}, 60*1000);
+// Refresh loop (5 sec)
+setInterval(function(){
+	refresh();
+}, 5000);

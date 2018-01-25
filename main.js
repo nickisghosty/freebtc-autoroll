@@ -1,3 +1,6 @@
+var b = (typeof browser !== 'undefined')?browser:chrome
+
+
 // Fake click function
 function eventFire(el, etype){
   if (el.fireEvent) {
@@ -9,47 +12,35 @@ function eventFire(el, etype){
   }
 }
 
-// Send information
-function send_information(){
-	browser.runtime.sendMessage({"rolls": rolls, "balance":document.getElementById("balance").innerHTML});
-}
+// Web elements
+var eButton = document.getElementById('free_play_form_button');
+var eBalance = document.getElementById("balance");
 
-// Roll !
-function roll(){
-	var element = document.getElementById('free_play_form_button');
-	if (element && element.style.display != "none"){
-		eventFire(element, 'click');
-
-		// send new data
-		rolls++;
-		send_information();	
-	}
-}
-
-// Current rolls
-var rolls = 0;
-
-// Current addon status
-var status = false;
-
-// Interval check
-var interval = 2; // minutes
-
-// Loop check
+// Check loop
 setInterval(function(){
-	if (status == "true") roll();
-}, interval*60*1000);
-
-// Popup data listener
-browser.runtime.onMessage.addListener(request => {
-	if (request.data == "start"){
-		return Promise.resolve({"rolls": rolls, "balance":document.getElementById("balance").innerHTML});
+	console.log("check if can roll...");
+	if (eButton && eButton.style.display != "none"){
+		b.runtime.sendMessage("roll");
 	}
-	if (request.status){
-		status = request.status;
+}, 5000);
+
+// Roll listener (to check if the addon is on)
+b.runtime.onMessage.addListener(request => {
+	if (request = "roll"){
+		eventFire(eButton, 'click');
+		console.log("roll !");
 		return null;
 	}
 });
 
-// Request for current status
-browser.runtime.sendMessage("status");
+// Balance refresh loop
+var balance = "0";
+setInterval(function(){
+	balance_ = eBalance?eBalance.innerHTML:"0.00000000";
+	console.log("check changes in balance...");
+	if (balance_ != balance){
+		balance = balance_;
+		b.runtime.sendMessage({"balance":balance});
+		console.log("send new balance");
+	}
+}, 5000);

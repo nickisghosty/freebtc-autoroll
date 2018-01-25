@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Freebitcoin Auto-roll",
-  "version": "1.0.1",
+  "version": "1.1.0",
 
   "description": "Auto-roll for freebitco.in",
 
@@ -28,6 +28,10 @@
 	  "default_popup": "popup/popup.html",
 	  "browser_style": true
 	},
+
+  "background": {
+    "scripts": ["background.js"]
+  },
 
   "content_scripts": [
     {
