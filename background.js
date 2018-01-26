@@ -58,7 +58,7 @@ function addCount(){
 	localStorage.setItem("count", getCount()+1);
 }
 function getCount(){
-	return localStorage.getItem("count") || 0;
+	return parseInt(localStorage.getItem("count")) || 0;
 }
 
 // Set initial status
