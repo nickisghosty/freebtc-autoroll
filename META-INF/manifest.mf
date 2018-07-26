@@ -1,0 +1,74 @@
+Manifest-Version: 1.0
+
+Name: backgroundscript.js
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: vIVX4dMuCtxcG4lUJeTY/w==
+SHA1-Digest: +cSy7kCQuzwGfRk2keZrALbZVKY=
+SHA256-Digest: 4xlIdUAH5+hygSyNofYetmtPC73j2i9dbIhWuKnuvGA=
+
+Name: contentscript.js
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: ABcv4j2cVaDEVld/vuGuBg==
+SHA1-Digest: YzdMEyDZ/c3QTNKBTaJxyy9Z3zA=
+SHA256-Digest: MWW1QchC+ChmmbPAUGVMcNcriDvJjbkd3NPhsxYm+Ns=
+
+Name: image.png
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: NIExnmO4DWKiQJdHXvPY5A==
+SHA1-Digest: Nlz/KHtpwKsLa/d24GExUIcBvXE=
+SHA256-Digest: DiiwcoVhXwsL2ha/QAipuZenubmjo9U3tU1lnt2/5NE=
+
+Name: manifest.json
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: puwFe4MZ6W+da8OUGXuArg==
+SHA1-Digest: 4UjuelM8ZmrQ+fLOojxToa62T0o=
+SHA256-Digest: 2hQwXnxbkkBVRaqdU9k9ZBBQomlUJugwTMtwrTLMLaA=
+
+Name: README.md
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: mEuUnqegVjThUesuxIyLlQ==
+SHA1-Digest: MpPr3RTsLMIrBwNK0TZh1k5lBbk=
+SHA256-Digest: 6uO6fWUqlws/i/mr9kkMinLK5FTZ2x1brw/q+fjru2A=
+
+Name: .vs/slnx.sqlite
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: KGE9voRkZXyHF1mpBrTbOA==
+SHA1-Digest: sOfv1gnwQpl8EIVU7pOJrBFEqs4=
+SHA256-Digest: 29qPbhmEKJ2mpHOrFD5xMmkDlXFrAeMQO459PYWCvgA=
+
+Name: .vs/VSWorkspaceState.json
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: xdiWTH9SiMC+KyRjqOzMeg==
+SHA1-Digest: 9PgOwbIz4E3XeSWFYjA2jg6FDvc=
+SHA256-Digest: +DFcis5YQlrspAwcF7O+jVCJTFX1Yc1+NiZtpdXqPXI=
+
+Name: .vs/nickisghosty@gmail.com/v15/.suo
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: MQUgQSneNv2BUUO1N4CLaQ==
+SHA1-Digest: p+88O7ivDzQbXRhg4uvSRyGmEnU=
+SHA256-Digest: QXVDrjeAKA96KclGryKPAA+ePRnOHNOIxGG8F0p+gio=
+
+Name: icons/bitcoin-logo.png
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: JbgCfNuMi3l8uxQxdKy6+w==
+SHA1-Digest: stEHpSHmsSdjNPPItEby4o/VwTg=
+SHA256-Digest: FB1CVzr30m7xbr/6enWA8bc8s5kg2aS0BofyBP605fM=
+
+Name: popup/popup-script.js
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: tNusCVbnR3SUwdpswgd3+w==
+SHA1-Digest: 5cONodxFrgScMonuJ3INQb9sqn8=
+SHA256-Digest: PmBQ9bNjybpIptaLpbn1KZUyhI/mtEgDJlUivTzVKfY=
+
+Name: popup/popup-style.css
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: /ijy+52yLejZbB5y8t4iyQ==
+SHA1-Digest: kKIlRpgpVsXyj0gavoBbWtpmCu4=
+SHA256-Digest: AsjuQwJhjrwTavlhhPPUuDtddE3GjHPBGTLaFRdDoyY=
+
+Name: popup/popup.html
+Digest-Algorithms: MD5 SHA1 SHA256
+MD5-Digest: 8+GvFcngQZyXl190WgfzFw==
+SHA1-Digest: nghlD2XDzNkcSLkm/1KbbzLDpiI=
+SHA256-Digest: rc+o15lSyiOed0X4NkT98OXdG1P8HHD2n+xjfDfDNq4=
+
