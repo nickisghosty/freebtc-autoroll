@@ -1,24 +1,40 @@
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<link rel="stylesheet" href="popup-style.css" />
-	</head>
 
-	<body>
-		<div id="container">
-			<p id="status">ON</p>
-			<label id="toggle" class="switch">
-			  <input id="status_ck" type="checkbox" checked>
-			  <span class="slider round"></span>
-			</label>
+<head>
+	<title>Automated Freebitco.in</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="popup-style.css" />
+</head>
 
-			<p id="rolls">Rolls: 0</p>
-			<p id="balance">0.00000000 BTC</p>
-		</div>
+<body>
+	<div id="container">
+		<p id="countdown">0 remaining</p>
+		<p id="status">ON</p>
+		<label id="toggle" class="switch">
+			<input id="status_ck" type="checkbox" checked>
+			<span class="slider round"></span>
+		</label>
+		<table id="table">
+			<tr>
+				<td>
+					<p id="btcclaimed">Rolls: 0</p>
+				</td>
+				<td>
+					<p id="btcbal">0.00000000 BTC</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<p id="rpclaimed">Bonuses: 0</p>
+				</td>
+				<td>
+					<p id="rpbal">0 RP</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<script src="popup-script.js"></script>
+</body>
 
-
-		<script src="popup-core.js"></script>
-	</body>
 </html>
-
-
