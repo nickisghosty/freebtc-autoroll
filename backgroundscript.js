@@ -1,5 +1,40 @@
 var b = typeof browser !== "undefined" ? browser : chrome;
+var isOpen = [];
+function logTabs(tabs) {
+	for (let tab of tabs) {
+	  // tab.url requires the `tabs` permission or a matching host permission.
+    console.log(tab.url);
+isOpen.push(tab.url);
+console.log(isOpen);  }
+	}
+  
+  function isInArray(value, array) {
+    return array.indexOf(value) > -1;
+  }
+  function onError(error) {
+	console.log(`Error: ${error}`);
+  }
+  let querying = b.tabs.query({});
+  querying.then(logTabs, onError);
 
+  function onCreated(tab) {
+	console.log(`Created new tab: ${tab.id}`);
+  isOpen.push(tab.url);
+  }
+  
+  function onError(error) {
+	console.log(`Error: ${error}`);
+  }
+  if (!isOpen.includes("https://freebitco.in/?op=home")){
+    b.tabs.create({url: "https://freebitco.in/?op=home"});
+ } 
+ console.log(b.tabs); 
+
+setInterval(function(){
+ 
+  if (!isOpen.includes("https://freebitco.in/?op=home")){
+    b.tabs.create({url: "https://freebitco.in/?op=home"});
+ } },3600000 );
 // Send data to tabs
 function sendData(send, callback) {
   if (callback == null) callback = function () { };
