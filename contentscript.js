@@ -1,5 +1,8 @@
 //firefox or chrome
 var b = typeof browser !== "undefined" ? browser : chrome; 
+chrome.runtime.sendMessage('test', response => {
+  console.log(response);
+});
 
 //variables
 var btcbal = "0",
