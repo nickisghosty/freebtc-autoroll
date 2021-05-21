@@ -42,4 +42,4 @@ refreshStatusText();
 refresh();
 
 // Refresh loop (5 sec)
-setInterval(refresh, 1000);
+setInterval(refresh, 5000);

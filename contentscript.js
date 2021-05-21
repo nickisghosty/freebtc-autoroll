@@ -25,6 +25,14 @@ function twentyfiverp() {
   window.wrappedJSObject.RedeemRPProduct("free_points_25");
   XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct("free_points_25"));
 }
+function tenrp() {
+  window.wrappedJSObject.RedeemRPProduct("free_points_10");
+  XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct("free_points_10"));
+}
+function onerp() {
+  window.wrappedJSObject.RedeemRPProduct("free_points_1");
+  XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct("free_points_1"));
+}
 
 //check if free play avail
 function check() {
@@ -34,17 +42,29 @@ function check() {
     //send title countdown to background
     b.runtime.sendMessage(countdown);
     //if rp bonus counter hidden
-    if (!document.getElementById("bonus_span_free_points")) {
+    if (!document.getElementById("bonus_container_free_points")) {
       //if value of rp bal > 1200 claim 100 rp / hr bonus
-      if (parseFloat(rpbal) >= 1200) {
-        b.runtime.sendMessage('fp_100');//send rp bonus to bg
-        //if value of rp bal < 1200  but rpbal > 600 claim 50 rp / hr bonus
-      } else if (parseFloat(rpbal) < 1200 && parseFloat(rpbal) >= 600) {
-        b.runtime.sendMessage({ data: 'fp_50' });//send rp bonus to bg
-        //if value of rp bal > 600  bur rpbal > 300 claim 100 rp / hr bonus
-      } else if (parseFloat(rpbal) < 600 && parseFloat(rpbal) >= 300) {
-        b.runtime.sendMessage('fp_25');//send rp bonus to bg
+      var rp = parseFloat(rpbal_elem)
+      switch (true) {
+        case rp >= 1200:
+          b.runtime.sendMessage('fp_100');//send rp bonus to bg
+          break;
+        case 1200 > rp >= 600:
+          b.runtime.sendMessage('fp_50');//send rp bonus to bg
+          break;
+        case 600 > rp >= 300:
+          b.runtime.sendMessage('fp_25');//send rp bonus to bg
+          break;
+        case 300 > rp >=120:
+          b.runtime.sendMessage('fp_10');//send rp bonus to bg
+          break;
+          case 120 > rp >= 12:
+            b.runtime.sendMessage('fp_1');//send rp bonus to bg
+          break;
+        default:console.log("Not enough RP for any bonus")
+          break;
       }
+     
     }
     // if free roll button visable
   } else if (fpbtn_elem && fpbtn_elem.style.display == "") {
@@ -88,24 +108,35 @@ function eventFire(el, etype) {
 }
 //listen  for messages from bg
 b.runtime.onMessage.addListener(request => {
-  if (request == "roll") {
-    eventFire(fpbtn_elem, "click");//click free roll
-    console.log("roll !");
-    //  return null;
-  }
-  if (request == "fp_100") {
+
+  switch (request) {
+    case "roll":
+      eventFire(fpbtn_elem, "click");//click free roll
+      console.log("roll !");
+      //  return null;
+      break;
+  case "fp_100":
     hundredrp();//click redeem rp bonus 100
     console.log("bonus 100");
-    //  return null;
+    break;
+    case "fp_50":
+      fiftyrp();//click redeem rp bonus 100
+      console.log("bonus 50");
+      break;
+      case "fp_25":
+        twentyfiverp();//click redeem rp bonus 100
+        console.log("bonus 25");
+        break;
+        case "fp_10":
+          tenrp();//click redeem rp bonus 100
+          console.log("bonus 10");
+          break;
+          case "fp_1":
+            onerp();//click redeem rp bonus 100
+            console.log("bonus 1");
+            break;
+            default:
+      break;
   }
-  if (request == "fp_50") {
-    fiftyrp();//click redeem rp bonus 50
-    console.log("bonus 50");
-    // return null;
-  }
-  if (request == "fp_25") {
-    fiftyrp();//click redeem rp bonus 25
-    console.log("bonus 25");
-    //  return null;
-  }
+  
 });
