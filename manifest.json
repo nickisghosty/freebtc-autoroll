@@ -22,13 +22,13 @@
   },
 
   "background": {
-    "scripts": ["backgroundscript.js"]
+    "scripts": ["browser-polyfill.js","backgroundscript.js"]
   },
   
   "content_scripts": [ 
     { 
       "matches": ["*://freebitco.in/*"],
-      "js": ["contentscript.js", "ad.js"],
+      "js": ["browser-polyfill.js", "contentscript.js", "ad.js"],
       "all_frames": true
     } 
   ],

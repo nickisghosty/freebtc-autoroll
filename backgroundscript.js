@@ -61,10 +61,6 @@ function sendData(send, callback) {
       console.error(`Error: ${error}`);
     });
 }
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
-  console.log('popup got', msg, 'from', sender);
-  sendResponse('response');
-});
 // Get data from tab
 b.runtime.onMessage.addListener(function (response) {
   if (response == 'roll') {
