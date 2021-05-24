@@ -70,6 +70,12 @@ b.runtime.onMessage.addListener(function (response) {
       addCount();
     }
   }
+  if(response =='captcha'){
+    console.log('response: ' + response);
+    if(getStatus() == 'on'){
+      sendData('captcha', null);
+    }
+  }
   if (response == 'fp_100') {
     console.log('response: ' + response);
     if (getStatus() == 'on') {

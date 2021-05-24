@@ -11,6 +11,7 @@ var btcbal = "0",
 
 //html elems
   fpbtn_elem = document.getElementById("free_play_form_button"),
+  captcha_elem = document.getElementById("play_without_captchas_button"),
   countdown_elem = document.getElementsByTagName("title")[0],
   btcbal_elem = document.getElementById("balance"),
   rpbal_elem = document.getElementsByClassName("reward_table_box br_0_0_5_5 user_reward_points font_bold")[0].innerHTML.replace(",", "");
@@ -71,8 +72,14 @@ function check() {
     }
     // if free roll button visable
   } else if (fpbtn_elem && fpbtn_elem.style.display == "") {
+    if(captcha_elem && captcha_elem.style.display == ""){
+      b.runtime.sendMessage("captcha");
+      console.log("captcha");
+    }
+    else{
     b.runtime.sendMessage('roll');//send free play roll to bg
     console.log("rollllll");
+    }
   }
 }
 
@@ -118,6 +125,11 @@ b.runtime.onMessage.addListener(request => {
       console.log("roll !");
       //  return null;
       break;
+      case "captcha":
+        eventFire(captcha_elem, "click");
+        console.log("no captchas clicked");
+        setTimeout(function(){eventFire(fpbtn_elem, "click"); }, 1500);
+        break;
   case "fp_100":
     hundredrp();//click redeem rp bonus 100
     console.log("bonus 100");
