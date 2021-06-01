@@ -12,7 +12,7 @@ Then checks if you have any RP bonus active, and if you have enough RP auto clai
 
 [Edge](https://microsoftedge.microsoft.com/addons/detail/freebitcoin-automated/mmmidhlgmjehopdjiinffadldiopmfck) [FireFox](https://addons.mozilla.org/en-US/firefox/addon/auto-freebitco-in-nickisghosty/) 
 
-Chrome you must install via source by downloading the zip and going to [about:extensions](about:extensions). Then make sure "Development mode" is on. Finally click the load unpacked extension and find the source file you just downloaded. You may thank Google for their developers fee in order to post to their extension store.
+Chrome you must install via source by downloading the zip and going to [about:extensions](chrome://about:extensions). Then make sure "Development mode" is on. Finally click the load unpacked extension and find the source file you just downloaded. You may thank Google for their developers fee in order to post to their extension store.
 
 # Usage
 Install and make sure the control is on in the pop up extension settings.
