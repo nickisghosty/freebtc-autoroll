@@ -8,7 +8,7 @@ Then checks if you have any RP bonus active, and if you have enough RP auto clai
 
 ![SS](https://user-images.githubusercontent.com/23060794/119176949-88192080-ba20-11eb-8051-00f1f776cbc5.png)
 
-**# Install**
+# Install
 
 [Edge](https://microsoftedge.microsoft.com/addons/detail/freebitcoin-automated/mmmidhlgmjehopdjiinffadldiopmfck) [FireFox](https://addons.mozilla.org/en-US/firefox/addon/auto-freebitco-in-nickisghosty/) 
 
