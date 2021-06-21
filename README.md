@@ -12,7 +12,7 @@ Then checks if you have any RP bonus active, and if you have enough RP auto clai
 
 [Edge](https://microsoftedge.microsoft.com/addons/detail/freebitcoin-automated/mmmidhlgmjehopdjiinffadldiopmfck) 
 
-Firefox you must install via source by downloading the zip and going to [about:addons](about:addons). Then click the little gear and select install addon from file. navigate to the zip file or if you extracted the zip the manifest file and click ok. You may thank Mozilla for considering this addon to go against their acceptable use policy for supporting "illegal gambiling". Even though it had been on their add on gallery for a couple years, and just this week they decided  it went against their rules. Must be because of the updates I've been doing.
+Firefox to install you need to download the signed XPI release and drag and drop to your firefox browser window. Then the add extension pop up window will appear where you'll need to click add. You may thank Mozilla for considering this addon to go against their acceptable use policy for supporting "illegal gambiling". Even though it had been on their add on gallery for a couple years, and just this week they decided  it went against their rules. Must be because of the updates I've been doing.
 
 Chrome you must install via source by downloading the zip and going to [about:extensions](chrome://about:extensions). Then make sure "Development mode" is on. Finally click the load unpacked extension and find the source file you just downloaded. You may thank Google for their developers fee in order to post to their extension store.
 
