@@ -134,7 +134,7 @@ b.runtime.onMessage.addListener(request => {
     hundredrp();//click redeem rp bonus 100
     console.log("bonus 100");
     break;
-    case "fp_50":
+    case "fp_50": 
       fiftyrp();//click redeem rp bonus 100
       console.log("bonus 50");
       break;
