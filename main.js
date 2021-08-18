@@ -30,6 +30,7 @@ var timeout= function(){
 	timeout();
 }, randomInterval());
 };
+timeout();
 
 // Roll listener (to check if the addon is on)
 b.runtime.onMessage.addListener(request => {
