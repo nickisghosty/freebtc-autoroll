@@ -15,14 +15,21 @@ function eventFire(el, etype){
 // Web elements
 var eButton = document.getElementById('free_play_form_button');
 var eBalance = document.getElementById("balance");
-
+var randomInterval = function(){
+	var i = ((Math.random()*1000)*20)+5000;
+	console.log(i);
+	return i;
+	};
 // Check loop
-setInterval(function(){
+var timeout= function(){
+	return setTimeout(function(){
 	console.log("check if can roll...");
 	if (eButton && eButton.style.display != "none"){
 		b.runtime.sendMessage("roll");
 	}
-}, 5000);
+	timeout();
+}, randomInterval());
+};
 
 // Roll listener (to check if the addon is on)
 b.runtime.onMessage.addListener(request => {
