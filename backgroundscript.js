@@ -1,9 +1,18 @@
-var b = typeof browser !== 'undefined' ? browser : chrome;
-var isOpen = [];
-var open;
+/*jshint esversion:6 */
+var isOpen = [],
+ open,
+ rpclaimed = 0,
+ btcclaimed = 0,
+ rpbal = '',
+ state = "",
+ countdown = '',
+ btcbal = '';
+set("btcclaimed", parseFloat(0));
+set("rpclaimed", parseFloat(0));
+
 function logTabs(tabs) {
   for (let tab of tabs) {
-    var taburl = tab.url;
+    const taburl = tab.url;
     // tab.url requires the `tabs` permission or a matching host permission.
     if (
       taburl.indexOf('freebitco.in') !== -1 ||
@@ -17,158 +26,197 @@ function logTabs(tabs) {
   if (isOpen.includes(true) || isOpen.indexOf(true) !== -1) {
     open = true;
   } else {
-    b.tabs.create({ url: 'https://freebitco.in/?op=home' });
+    browser.tabs.create({
+      url: 'https://freebitco.in/?op=home'
+    });
     open = true;
-  console.log(open);
-}}
+    console.log(open);
+  }
+}
 openIfNeeded();
+
 function onError(error) {
   console.log(`Error: ${error}`);
 }
+
 function onRemoved(tab) {
   console.log(`Removed tab: ${tab.id}`);
-openIfNeeded();
-isOpen =[];
-  }
+  openIfNeeded();
+  isOpen = [];
+}
 
 function onCreated(tab) {
   console.log(`Created new tab: ${tab.id}`);
 }
+
 function openIfNeeded() {
-  let querying = b.tabs.query({});
+  let querying = browser.tabs.query({});
   querying.then(logTabs, onError);
-isOpen = [];
-  setTimeout(function() {openIfNeeded(); }, 5000);
+  isOpen = [];
+  setTimeout(() => {
+    openIfNeeded();
+  }, ((Math.random() * 1000) * 20) + 1000);
 }
 // Send data to tabs
 function sendData(send, callback) {
-  if (callback == null) callback = function () { };
-  b.tabs
-    .query({ url: '*://*.freebitco.in/*' })
-    .then(function (tabs) {
+  if (callback == null) callback = () => {};
+  browser.tabs
+    .query({
+      url: '*://*.freebitco.in/*'
+    })
+    .then(tabs => {
       for (let tab of tabs) {
-        b.tabs
+        browser.tabs
           .sendMessage(tab.id, send)
-          .then(response => {
+          .then(function(response){
             callback(response);
           })
-          .catch(function (error) {
+          .catch(function(error){
             console.error(`Error: ${error}`);
           });
       }
     })
-    .catch(function (error) {
+    .catch(error => {
       console.error(`Error: ${error}`);
     });
 }
+
+
 // Get data from tab
-b.runtime.onMessage.addListener(function (response) {
+browser.runtime.onMessage.addListener(response => {
   if (response == 'roll') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+
+   get("status");
+    if (state == 'on') {
       sendData('roll', null);
       addCount();
     }
   }
-  if(response =='captcha'){
-    console.log('response: ' + response);
-    if(getStatus() == 'on'){
+  if (response == 'captcha') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('captcha', null);
     }
   }
   if (response == 'fp_100') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('fp_100', null);
       addCountrp();
     }
   }
   if (response == 'fp_50') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('fp_50', null);
       addCountrp();
     }
   }
   if (response == 'fp_25') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('fp_25', null);
       addCountrp();
     }
   }
   if (response == 'fp_10') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('fp_10', null);
       addCountrp();
     }
   }
   if (response == 'fp_1') {
-    console.log('response: ' + response);
-    if (getStatus() == 'on') {
+    console.log(`response: ${response}`);
+    get("status");
+    if (state == 'on') {
       sendData('fp_1', null);
       addCountrp();
     }
   }
   if (response.btcbal) {
-    console.log('response: ' + response.btcbal);
-    console.log('set new balance: ' + response.btcbal);
-    setBalance(response.btcbal);
+    console.log(`response: ${response.btcbal}`);
+    console.log(`set new balance: ${response.btcbal}`);
+    set("btcbal",response.btcbal);
   }
   if (response.rpbal) {
-    console.log('response: ' + response.rpbal);
-    console.log('set new rp balance: ' + response.rpbal);
-    setRPBalance(response.rpbal)
+    console.log(`response: ${response.rpbal}`);
+    console.log(`set new rp balance: ${response.rpbal}`);
+    set("rpbal",response.rpbal);
   }
   if (response.countdown) {
-    setTime(response.countdown);
+    set("countdown",response.countdown);
   }
 });
 
-// Status get and set
-function setStatus(value) {
-  localStorage.setItem('activate', value);
-}
-function getStatus() {
-  return localStorage.getItem('activate') || 'off';
+
+function set(item, value) {
+  var setter = browser.storage.local.set({
+    [item]: value
+  }).then(() => {
+    console.log(`Set ${item} : ${value}`);
+  }, onError);
 }
 
-// Balance get and set
-function setBalance(value) {
-  localStorage.setItem('btcbal', value);
+function get(item) {
+  var getter = browser.storage.local.get(item.toString()).then(result => { 
+  
+    let value = result[item];
+
+    console.log(value);
+    got(item,value);
+  },onError);
+
+}
+function got(item, value) {
+  switch (item) {
+    case "status":
+      state = value;
+      break;
+    case "btcbal":
+      btcbal = value;
+      break;
+    case "rpbal":
+      rpbal = value;
+      break;
+    case "btcclaimed":
+      btcclaimed = value;
+      break;
+    case "rpclaimed":
+      rpclaimed = value;
+      break;
+    case "countdown":
+      countdown = value;
+      break;
+  }
+}
+function onError(err) {
+  console.log(`Error: ${err}`);
 }
 
-function getBalance() {
-  return localStorage.getItem('btcbal') || 0;
-}
-function setTime(value) {
-  localStorage.setItem('countdown', value);
-}
-function getTime() {
-  return localStorage.getItem('countdown') || 0;
-}
-function setRPBalance(value) {
-  localStorage.setItem('rpbal', value);
-}
 
-function getRPBalance() {
-  return localStorage.getItem('rpbal') || 0;
-}
 
 // Count get and set
 function addCount() {
-  localStorage.setItem('btcclaimed', getCount() + 1);
-}
-function addCountrp() {
-  localStorage.setItem('rpclaimed', getCountrp() + 1);
-}
-function getCount() {
-  return parseInt(localStorage.getItem('btcclaimed')) || 0;
-}
-function getCountrp() {
-  return parseInt(localStorage.getItem('rpclaimed')) || 0;
+  get("btcclaimed");
+    set("btcclaimed", btcclaimed+1);
+
 }
 
+function addCountrp() {
+  get("rpclaimed");
+  set("rpclaimed", rpclaimed+1);
+  
+}
+
+
+
+
 // Set initial status
-setStatus('on');
+set("status", "on");

@@ -1,8 +1,4 @@
-//firefox or chrome
-var b = typeof browser !== "undefined" ? browser : chrome; 
-chrome.runtime.sendMessage('test', response => {
-  console.log(response);
-});
+
 
 //variables
 var btcbal = "0",
@@ -44,26 +40,26 @@ function check() {
   //if free roll button hidden
   if (fpbtn_elem && fpbtn_elem.style.display == "none") {
     //send title countdown to background
-    b.runtime.sendMessage(countdown);
+    browser.runtime.sendMessage(countdown);
     //if rp bonus counter hidden
     if (!document.getElementById("bonus_container_free_points")) {
       //if value of rp bal > 1200 claim 100 rp / hr bonus
       var rp = parseFloat(rpbal_elem)
       switch (true) {
         case rp >= 1200:
-          b.runtime.sendMessage('fp_100');//send rp bonus to bg
+          browser.runtime.sendMessage('fp_100');//send rp bonus to bg
           break;
         case 1200 > rp >= 600:
-          b.runtime.sendMessage('fp_50');//send rp bonus to bg
+          browser.runtime.sendMessage('fp_50');//send rp bonus to bg
           break;
         case 600 > rp >= 300:
-          b.runtime.sendMessage('fp_25');//send rp bonus to bg
+          browser.runtime.sendMessage('fp_25');//send rp bonus to bg
           break;
         case 300 > rp >=120:
-          b.runtime.sendMessage('fp_10');//send rp bonus to bg
+          browser.runtime.sendMessage('fp_10');//send rp bonus to bg
           break;
           case 120 > rp >= 12:
-            b.runtime.sendMessage('fp_1');//send rp bonus to bg
+            browser.runtime.sendMessage('fp_1');//send rp bonus to bg
           break;
         default:console.log("Not enough RP for any bonus")
           break;
@@ -73,11 +69,11 @@ function check() {
     // if free roll button visable
   } else if (fpbtn_elem && fpbtn_elem.style.display == "") {
     if(captcha_elem && captcha_elem.style.display == ""){
-      b.runtime.sendMessage("captcha");
+      browser.runtime.sendMessage("captcha");
       console.log("captcha");
     }
     else{
-    b.runtime.sendMessage('roll');//send free play roll to bg
+    browser.runtime.sendMessage('roll');//send free play roll to bg
     console.log("rollllll");
     }
   }
@@ -91,17 +87,17 @@ function update() {
 
   if (btcbal !== btcbal_elem && btcbal !== btcbal_) {
     btcbal = btcbal_;
-    b.runtime.sendMessage({ btcbal: btcbal });//send bal to bg
+    browser.runtime.sendMessage({ btcbal: btcbal });//send bal to bg
     console.log("new balance: " + btcbal);
   }
   if (rpbal !== rpbal_elem || rpbal !== rpbal_) {
     rpbal = rpbal_;
-    b.runtime.sendMessage({ rpbal: rpbal });//send bal to bg
+    browser.runtime.sendMessage({ rpbal: rpbal });//send bal to bg
     console.log("new RP Balance: " + rpbal);
   }
   if ((countdown !== null || countdown_elem !== null) && (countdown !== countdown_elem || countdown !== countdown_)) {
     countdown = countdown_;
-    b.runtime.sendMessage({ countdown: countdown });//send countdown to bg
+    browser.runtime.sendMessage({ countdown: countdown });//send countdown to bg
   }
 }
 setInterval(check, 1000);//loop check for free play/update vars
@@ -117,16 +113,18 @@ function eventFire(el, etype) {
   }
 }
 //listen  for messages from bg
-b.runtime.onMessage.addListener(request => {
+browser.runtime.onMessage.addListener((request) =>{
 
   switch (request) {
     case "roll":
       eventFire(fpbtn_elem, "click");//click free roll
-      console.log("roll !");
+      fpbtn_elem.trigger('click');
+            console.log("roll !");
       //  return null;
       break;
       case "captcha":
         eventFire(captcha_elem, "click");
+        captcha_elem.trigger('click');
         console.log("no captchas clicked");
         setTimeout(function(){eventFire(fpbtn_elem, "click"); }, 1500);
         break;

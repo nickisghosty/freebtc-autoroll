@@ -5,6 +5,8 @@
 	<title>Automated Freebitco.in</title>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="popup-style.css" />
+	<script type="application/javascript" src="../browser-polyfill.js"></script>
+
 </head>
 
 <body>
@@ -16,7 +18,7 @@
 		<p id="countdown">0 remaining</p>
 		<p id="status">ON</p>
 		<label id="toggle" class="switch">
-			<input id="status_ck" type="checkbox" checked>
+			<input id="status_ck" type="checkbox" checked="true" onclick="toggleStatus()">
 			<span class="slider round"></span>
 		</label>
 		<table id="table">
@@ -38,7 +40,7 @@
 			</tr>
 		</table>
 	</div>
-	<script src="popup-script.js"></script>
+	<script type="application/javascript" src="popup-script.js"></script>
 </body>
 
 </html>

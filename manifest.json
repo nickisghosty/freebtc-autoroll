@@ -1,7 +1,7 @@
 { 
   "manifest_version": 2,
   "name": "Freebitco.in Automated",
-  "version": "3.4",
+  "version": "3.5.1",
   "description": "Automatically clicks 'Roll' to claim your hourly satoshi + claims RP bonus if able",
 
   "applications": {
@@ -33,5 +33,5 @@
     } 
   ],
 
-  "permissions": ["tabs", "*://freebitco.in/*"]
+  "permissions": ["storage", "tabs", "*://freebitco.in/*"]
 }
