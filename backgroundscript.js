@@ -100,7 +100,7 @@ browser.runtime.onMessage.addListener(response => {
       sendData('captcha', null);
     }
   }
-  if (response == 'fp_100') {
+  /*if (response == 'fp_100') {
     console.log(`response: ${response}`);
     get("status");
     if (state == 'on') {
@@ -139,7 +139,7 @@ browser.runtime.onMessage.addListener(response => {
       sendData('fp_1', null);
       addCountrp();
     }
-  }
+  }*/
   if (response.btcbal) {
     console.log(`response: ${response.btcbal}`);
     console.log(`set new balance: ${response.btcbal}`);

@@ -1,10 +1,9 @@
-{ 
+{
   "manifest_version": 2,
   "name": "Freebitco.in Automated",
-  "version": "3.5.1",
+  "version": "3.5.2",
   "description": "Automatically clicks 'Roll' to claim your hourly satoshi + claims RP bonus if able",
-
-  "applications": {
+  "browser_specific_settings": {
     "gecko": {
       "id": "nickisghosty@gmail.com"
     }
@@ -22,16 +21,14 @@
   },
 
   "background": {
-    "scripts": ["browser-polyfill.js","backgroundscript.js"]
+    "scripts": ["browser-polyfill.js", "backgroundscript.js"]
   },
-  
-  "content_scripts": [ 
-    { 
-      "matches": ["*://freebitco.in/*"],
-      "js": ["browser-polyfill.js", "contentscript.js", "ad.js"],
-      "all_frames": true
-    } 
-  ],
+
+  "content_scripts": [{
+    "matches": ["*://freebitco.in/*"],
+    "js": ["browser-polyfill.js", "contentscript.js", "ad.js"],
+    "all_frames": true
+  }],
 
   "permissions": ["storage", "tabs", "*://freebitco.in/*"]
 }

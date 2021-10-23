@@ -1,16 +1,17 @@
 
 
+// jshint esversion: 11
 //variables
 var btcbal = "0",
   rpbal = "0",
   countdown = "0",
 
 //html elems
-  fpbtn_elem = document.getElementById("free_play_form_button"),
-  captcha_elem = document.getElementById("play_without_captchas_button"),
-  countdown_elem = document.getElementsByTagName("title")[0],
-  btcbal_elem = document.getElementById("balance"),
-  rpbal_elem = document.getElementsByClassName("reward_table_box br_0_0_5_5 user_reward_points font_bold")[0].innerHTML.replace(",", "");
+  fpbtn_elem = document?.getElementById("free_play_form_button")||null,
+  captcha_elem = document?.getElementById("play_without_captchas_button")||0,
+  countdown_elem = document?.getElementsByTagName("title")[0]||0,
+  btcbal_elem = document?.getElementById("balance")||0,
+  rpbal_elem = document?.getElementsByClassName("reward_table_box br_0_0_5_5 user_reward_points font_bold")[0]?.innerHTML.replace(",", "");
 
 //rp bonus functions
 function hundredrp() {
@@ -126,9 +127,9 @@ browser.runtime.onMessage.addListener((request) =>{
         eventFire(captcha_elem, "click");
         captcha_elem.trigger('click');
         console.log("no captchas clicked");
-        setTimeout(function(){eventFire(fpbtn_elem, "click"); }, 1500);
+        setTimeout(() => {eventFire(fpbtn_elem, "click"); }, (Math.random()*10000)+10000);
         break;
-  case "fp_100":
+  /*case "fp_100":
     hundredrp();//click redeem rp bonus 100
     console.log("bonus 100");
     break;
@@ -149,7 +150,7 @@ browser.runtime.onMessage.addListener((request) =>{
             console.log("bonus 1");
             break;
             default:
-      break;
+      break;*/
   }
   
 });

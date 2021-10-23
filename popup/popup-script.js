@@ -1,4 +1,4 @@
-/*jshint esversion: 6*/
+/*jshint esversion: 11*/
 const status_ck = document.getElementById("status_ck");
 
 var countdown = '',
@@ -13,11 +13,25 @@ var countdown = '',
 const regex = /\d+\D\W\d+\D/;
 
 const regtime = () => {
-  get("countdown")
+  get("countdown");
   const cd = countdown.toString();
   return cd.match(regex);
 };
+window.onclick=function(e){
+  var target = e.target;
+  if(target.matches('.tab')){
+    Array.from(document.querySelectorAll('.active')).forEach(function(el) { 
+      el.classList.remove('active');
+  });
 
+    var clicked = e.target.id;
+    var element = document.getElementById(clicked);
+    element.classList.add('active');
+    var tabcontent = `${clicked}-content`;
+    var contentelement = document.getElementById(tabcontent);
+    contentelement.classList.add('active');
+  }
+}
 function set(item, value) {
   var setter = browser.storage.local.set({
     [item]: value
@@ -109,13 +123,13 @@ function refresh() {
   get("rpclaimed");
   get("status");
   get("countdown");
-  document.getElementById("rpbal").textContent = `${rpbal} RP`;
+   if(document.getElementById("rpbal"))document.getElementById("rpbal").textContent = `${rpbal} RP`;
  
-  document.getElementById("btcbal").textContent = `${btcbal} BTC`;
-  document.getElementById("btcclaimed").textContent = `Rolls: ${btcclaimed}`;
-  document.getElementById("rpclaimed").textContent = `Bonuses: ${rpclaimed}`;
+  if(document.getElementById("btcbal")){document.getElementById("btcbal").textContent = `${btcbal} BTC`;}
+  if(document.getElementById("btcclaimed")){document.getElementById("btcclaimed").textContent = `Rolls: ${btcclaimed}`;}
+  if(document.getElementById("rpclaimed")){document.getElementById("rpclaimed").textContent = `Bonuses: ${rpclaimed}`;}
   let cd = countdown.toString().match(regex);
-  document.getElementById(`countdown`).textContent = `${cd || ""} remaining`;
+  if(document.getElementById(`countdown`)){document.getElementById(`countdown`).textContent = `${cd || ""} remaining`;}
 
   console.log(`refresh rolls: ${btcclaimed}`);
   console.log(`refresh btcbal: ${btcbal}`);

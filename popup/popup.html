@@ -11,35 +11,116 @@
 
 <body>
 	<div id="container">
-		<center>
-			<a style="margin-left:80px;" href="https://a-ads.com?partner=1643535">Advertise with Anonymous Ads</a><br /><br />
-	<iframe data-aa="1643535" src="https://ad.a-ads.com/1643535?size=320x50" scrolling="no" style="width:320px; height:50px; border:0px; padding:10; overflow:hidden" allowtransparency="true"></iframe>
-</center>
-		<p id="countdown">0 remaining</p>
-		<p id="status">ON</p>
-		<label id="toggle" class="switch">
-			<input id="status_ck" type="checkbox" checked="true" onclick="toggleStatus()">
-			<span class="slider round"></span>
-		</label>
-		<table id="table">
-			<tr>
-				<td>
-					<p id="btcclaimed">Rolls: 0</p>
-				</td>
-				<td>
-					<p id="btcbal">0.00000000 BTC</p>
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<p id="rpclaimed">Bonuses: 0</p>
-				</td>
-				<td>
-					<p id="rpbal">0 RP</p>
-				</td>
-			</tr>
-		</table>
+		<a style="margin-left:auto;margin-right:auto;text-align:center;"
+			href="https://a-ads.com?partner=1643535">Advertise with Anonymous
+			Ads</a><br /><br />
+		<iframe data-aa="1643535" src="https://ad.a-ads.com/1643535?size=320x50" scrolling="no"
+			style="width:320px; height:50px; border:0px; overflow:hidden" allowtransparency="true"></iframe>
+
+		<div class="tabs">
+			<a href="#">
+				<div id="home" class="tab active">Free Play</div>
+			</a>
+			<a href="#">
+				<div id="autobet" class="tab">Auto Bet</div>
+			</a>
+			<a href="#">
+				<div id="about" class="tab">About</div>
+			</a>
+		</div>
+		<div class="tab-content active" id="home-content">
+
+			<p id="countdown">0 remaining</p>
+			<p id="status">ON</p>
+			<div id="status_container" class="checkbox-container">
+				<input type="checkbox" checked id="status_ck" />
+				<label for="status_ck"></label>
+				<div class="active-circle"></div>
+			</div>
+			<table class="table">
+				<tr>
+					<td>
+						<p id="btcclaimed">Rolls: 0</p>
+					</td>
+					<td>
+						<p id="btcbal">0.00000000 BTC</p>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<p id="rpclaimed">Bonuses: 0</p>
+					</td>
+					<td>
+						<p id="rpbal">0 RP</p>
+					</td>
+				</tr>
+			</table>
+			<table class="table">
+				<tr>
+					<td id="fpdelay">Free Play Delay</td>
+					<td><input type="radio" id="randomdelay" name="fpdelay" value="random" checked="checked" /><label
+							for="randomdelay">Random</label>
+						<br />
+						<input type="radio" id="valuedelay" name="fpdelay" value="seconds" /><label for="valuedelay">
+							<input type="number" name="delayvalue" id="delayvalue" min="0" max="3599" value="0" /><label
+								for="delayvalue"> Seconds</label></label>
+					</td>
+				</tr>
+				<tr>
+					<td>Rewards Bonus</td>
+					<td>
+						<div class="checkbox-container">
+							<span>Free BTC:</span>
+							<input type="checkbox" id="freebtc" name="rewardsbonus" value="freebtc" checked="checked" />
+							<label for="freebtc"></label>
+							<div class="active-circle"></div>
+						</div>
+						<br />
+						<div class="checkbox-container">
+							<span>Lotto Tickets</span>
+							<input type="checkbox" id="lotto" name="rewardsbonus" value="lotto" />
+							<label for="lotto"></label>
+							<div class="active-circle"></div>
+						</div>
+						<br />
+						<div class="checkbox-container">
+							<span>Fun Tokens</span>
+							<input type="checkbox" id="funtokens" name="rewardsbonus" checked="checked"
+								value="funtokens" />
+							<label for="funtokens"></label>
+							<div class="active-circle"></div>
+						</div>
+						<br />
+						<div class="checkbox-container">
+							<span>Wheel of Fortune</span>
+							<input type="checkbox" id="wof" name="rewardsbonus" value="wof" />
+							<label for="wof"></label>
+							<div class="active-circle"></div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="tab-content" id="autobet-content">
+
+		</div>
+		<div class="tab-content" id="about-content">
+			<table class="table">
+				<tr>
+					<td>Author:</td>
+					<td>NickisGhosty</td>
+				</tr>
+				<tr>
+					<td>Website:</td>
+					<td><a href="https://github.com/nickisghosty/freebtc-autoroll">Source</a>
+					</td>
+				</tr>
+				<tr><td>Contact:</td><td><a href="mailto:nickisghosty@gmail.com">Email</a>
+				</td></tr>
+			</table>
+		</div>
 	</div>
+
 	<script type="application/javascript" src="popup-script.js"></script>
 </body>
 
