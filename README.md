@@ -6,7 +6,7 @@ It also waits for the free play button to become available and automatically cli
 
 Then checks if you have any RP bonus active, and if you have enough RP auto claims the highest bonus accordingly.
 
-![SS](https://user-images.githubusercontent.com/23060794/119176949-88192080-ba20-11eb-8051-00f1f776cbc5.png)
+![SS](https://github.com/nickisghosty/freebtc-autoroll/raw/master/SS.png)
 
 # Install
 
