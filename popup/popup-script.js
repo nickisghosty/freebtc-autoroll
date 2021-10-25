@@ -1,5 +1,12 @@
 /*jshint esversion: 11*/
-const status_ck = document.getElementById("status_ck");
+const status_ck = document.getElementById("status_ck"),
+ randomDelay = document.getElementById('randomdelay'),
+ valueDelay = document.getElementById('valuedelay'),
+ delayValue = document.getElementById('delayvalue'),
+ freeBTCBonus = document.getElementById('freebtc'),
+ lottoBonus = document.getElementById('lotto'),
+ funBonus = document.getElementById('funtokens'),
+ wofBonus = document.getElementById('wof');
 
 var countdown = '',
  btcclaimed = 0,
@@ -7,7 +14,15 @@ var countdown = '',
 
  rpclaimed = 0,
  state = "",
+ _freeBTCBonus = true,
+ _lottoBonus = false,
+ _funBonus = true,
+ _wofBonus = false,
+ _randomDelay = true,
+ _valueDelay = false,
+ _delayValue=0,
  btcbal = '';
+
 
 
 const regex = /\d+\D\W\d+\D/;
@@ -31,7 +46,7 @@ window.onclick=function(e){
     var contentelement = document.getElementById(tabcontent);
     contentelement.classList.add('active');
   }
-}
+};
 function set(item, value) {
   var setter = browser.storage.local.set({
     [item]: value
@@ -45,7 +60,7 @@ function get(item) {
   
     let value = result[item];
 
-    console.log(value);
+    console.log(`got ${item} : ${value}`);
     got(item,value);
   },onError);
 
@@ -70,6 +85,26 @@ function got(item, value) {
     case "countdown":
       countdown = value;
       break;
+      case "freebtcbonus":
+        _freeBTCBonus = value;
+        break;
+        case "lottobonus":
+          _lottoBonus = value;
+          break;
+          case "funbonus":
+            _funBonus = value;
+            break;
+            case "wofbonus":
+              _wofBonus = value;
+              break;
+              case "randomdelay":
+                _randomDelay = value;
+                break;
+                case "valuedelay":
+                  _valueDelay = value;
+                  break;
+                  case "delayvalue":
+                    _delayValue = value;
   }
 }
 function onError(err) {
@@ -88,7 +123,16 @@ function refreshStatusText() {
     document.getElementById("status").style.color = "#803333";
     status_ck.checked = true;
   }
-
+  if(_freeBTCBonus == true){
+    freeBTCBonus.checked = true;
+  } else{ freeBTCBonus.checked = false; }
+  if(_lottoBonus == true){
+    lottoBonus.checked = true;
+  }else{ lottoBonus.checked = false; }
+  if(_funBonus == true){funBonus.checked = true; } else{ funBonus.checked = false; }
+  if(_wofBonus == true){wofBonus.checked = true; } else{ wofBonus.checked = false;}
+if(_valueDelay == true){valueDelay.checked = true; } else{ valueDelay.checked = false; }
+if(_randomDelay == true){randomDelay.checked = true; } else{ randomDelay.checked = false;}
 }
 
 // On change status
@@ -102,18 +146,65 @@ status_ck.onchange = () => {
 set("status", value);
 };
 
-  function toggleStatus() {
-    let value;
-    if (status_ck.checked) {
-      value = "on";
-    } else {
-      value = "off";
-    }
-    set("status",value);
+freeBTCBonus.onchange = () => {
+  let value;
+  if(freeBTCBonus.checked === true) {
+    value =true;
+  }else{value=false;  }
+  set("freebtcbonus", value);
+};
+lottoBonus.onchange = () => {
+  let value;
+  if(lottoBonus.checked === true) {
+    value=true;
+  } else {value=false;}
+  set("lottobonus", value);
   
+};
+funBonus.onchange = () => {
+  let value;
+  if(funBonus.checked === true) {
+    value =true;
+  } else{
+    value=false;
+  }
+  set("funbonus", value);
+};
+wofBonus.onchange = () => {
+  let value;
+  if(wofBonus.checked === true) {
+    value= true;
+  }else{value=false;}
+  set("wofbonus", value);
+};
+randomDelay.onchange = () => {
+  let value;
+  if(randomDelay.checked === true){
+    value = true;}
+    else{value=false;}
+    set("randomdelay", value);
+  
+};
+valueDelay.onchange = () => {
+  let value;
+  if(valueDelay.checked === true){
+    value = true;} else{ value = false; }
+    set("valuedelay", value);
+  
+};
+function toggleStatus() {
+  let value;
+  if (status_ck.checked) {
+    value = "on";
+  } else {
+    value = "off";
+  }
+  set("status",value);
 
-  refreshStatusText();
+
+refreshStatusText();
 }
+
 
 // Refresh data
 function refresh() {
@@ -123,6 +214,12 @@ function refresh() {
   get("rpclaimed");
   get("status");
   get("countdown");
+  get("freebtcbonus");
+  get("lottobonus");
+  get("funbonus");
+  get("wofbonus");
+  get("randomdelay");
+  get("valuedelay");
    if(document.getElementById("rpbal"))document.getElementById("rpbal").textContent = `${rpbal} RP`;
  
   if(document.getElementById("btcbal")){document.getElementById("btcbal").textContent = `${btcbal} BTC`;}
@@ -130,18 +227,39 @@ function refresh() {
   if(document.getElementById("rpclaimed")){document.getElementById("rpclaimed").textContent = `Bonuses: ${rpclaimed}`;}
   let cd = countdown.toString().match(regex);
   if(document.getElementById(`countdown`)){document.getElementById(`countdown`).textContent = `${cd || ""} remaining`;}
-
   console.log(`refresh rolls: ${btcclaimed}`);
   console.log(`refresh btcbal: ${btcbal}`);
   console.log(`refresh bonuses: ${rpclaimed}`);
   console.log(`refresh rpbal: ${rpbal}`);
   console.log(`refresh countdown: ${countdown}`);
   console.log(`status: ${state}`);
-  refreshStatusText();
+  console.log(`refresh _freeBTCBonus: ${_freeBTCBonus}`);
+  console.log(`refresh _lottoBonus: ${_lottoBonus}`);
+  console.log(`refresh _funBonus: ${_funBonus}`);
+  console.log(`refresh _wofBonus: ${_wofBonus}`);
+  console.log(`refresh _randomDelay: ${_randomDelay}`);
+  console.log(`refresh _valueDelay: ${_valueDelay}`);
+   refreshStatusText();
 }
-
+get("btcbal");
+get("btcclaimed");
+get("rpbal");
+get("rpclaimed");
 get("status");
+get("freebtcbonus");
+get("lottobonus");
+get("funbonus");
+get("wofbonus");
+
+get("randomdelay");
+get("valuedelay");
 status_ck.checked = state == "on" ? true : false;
+freeBTCBonus.checked = _freeBTCBonus == true ? true : false;
+lottoBonus.checked = _lottoBonus == true ? true : false;
+funBonus.checked = _funBonus == true ? true : false;
+wofBonus.checked = _wofBonus == true ? true : false;
+randomDelay.checked = _randomDelay == true ? true : false;
+valueDelay.checked = _valueDelay == true ? true: false;
 refreshStatusText();
 refresh();
 
@@ -149,4 +267,5 @@ refresh();
 setInterval(() => {
   refresh();
   refreshStatusText();
-}, 1000);
+
+}, 250);
