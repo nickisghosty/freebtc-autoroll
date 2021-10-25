@@ -104,76 +104,81 @@ function check() {
     browser.runtime.sendMessage(countdown);
     //if rp bonus counter hidden
     var rp = parseFloat(rpbal_elem);
-    switch (true) {
-      case freeBTCBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[23].textContent.replace(',', '')):
-        browser.runtime.sendMessage('freebtc1000');
-        break;
-      case freeBTCBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[23].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[24].textContent.replace(',', '')):
-        browser.runtime.sendMessage('freebtc500');
-        break;
-      case freeBTCBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[24].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[25].textContent.replace(',', '')):
-        browser.runtime.sendMessage('freebtc100');
-        break;
-      case lottoBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[27].textContent.replace(',', '')):
-        browser.runtime.sendMessage('lotto100');
-        break;
-      case lottoBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[27].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[28].textContent.replace(',', '')):
-        browser.runtime.sendMessage('lotto50');
-        break;
-      case lottoBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[28].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[29].textContent.replace(',', '')):
-        browser.runtime.sendMessage('lotto25');
-        break;
-      case funBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[32].textContent.replace(',', '')):
-        browser.runtime.sendMessage('fun5');
-        break;
-      case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[32].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[33].textContent.replace(',', '')):
-        browser.runtime.sendMessage('fun4');
-        break;
-      case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[33].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[34].textContent.replace(',', '')):
-        browser.runtime.sendMessage('fun3');
-        break;
-      case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[34].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[35].textContent.replace(',', '')):
-        browser.runtime.sendMessage('fun2');
-        break;
-      case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[35].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[36].textContent.replace(',', '')):
-        browser.runtime.sendMessage('fun1');
-        break;
-      case wofBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[37].textContent.replace(',', '')):
-        browser.runtime.sendMessage('wof5');
-        break;
-      case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[37].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[38].textContent.replace(',', '')):
-        browser.runtime.sendMessage('wof4');
-        break;
-      case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[38].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[39].textContent.replace(',', '')):
-        browser.runtime.sendMessage('wof3');
-        break;
-      case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[39].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[40].textContent.replace(',', '')):
-        browser.runtime.sendMessage('wof2');
-        break;
-      case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[40].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[41].textContent.replace(',', '')):
-        browser.runtime.sendMessage('wof1');
-        break;
-        default:
-          var noRP = [];
-          for (var i = 23; i < 41; i++){
+    if (document.getElementsByClassName("reward_dollar_value_style").length == 0) {
+    
+      document.getElementsByClassName("rewards_link")[0].click();
+    }
 
-            if(rp < parseFloat(document.getElementsByClassName("reward_dollar_value_style")[i].textContent.replace(',', ''))){
-              noRP.push(true);
-            }
-            else{
-              noRP.push(false);
+    setTimeout(() => {
+      switch (true) {
+        case freeBTCBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[23].textContent.replace(',', '')):
+          browser.runtime.sendMessage('freebtc1000');
+          break;
+        case freeBTCBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[23].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[24].textContent.replace(',', '')):
+          browser.runtime.sendMessage('freebtc500');
+          break;
+        case freeBTCBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[24].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[25].textContent.replace(',', '')):
+          browser.runtime.sendMessage('freebtc100');
+          break;
+        case lottoBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[27].textContent.replace(',', '')):
+          browser.runtime.sendMessage('lotto100');
+          break;
+        case lottoBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[27].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[28].textContent.replace(',', '')):
+          browser.runtime.sendMessage('lotto50');
+          break;
+        case lottoBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[28].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[29].textContent.replace(',', '')):
+          browser.runtime.sendMessage('lotto25');
+          break;
+        case funBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[32].textContent.replace(',', '')):
+          browser.runtime.sendMessage('fun5');
+          break;
+        case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[32].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[33].textContent.replace(',', '')):
+          browser.runtime.sendMessage('fun4');
+          break;
+        case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[33].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[34].textContent.replace(',', '')):
+          browser.runtime.sendMessage('fun3');
+          break;
+        case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[34].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[35].textContent.replace(',', '')):
+          browser.runtime.sendMessage('fun2');
+          break;
+        case funBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[35].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[36].textContent.replace(',', '')):
+          browser.runtime.sendMessage('fun1');
+          break;
+        case wofBonusDiv == null && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[37].textContent.replace(',', '')):
+          browser.runtime.sendMessage('wof5');
+          break;
+        case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[37].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[38].textContent.replace(',', '')):
+          browser.runtime.sendMessage('wof4');
+          break;
+        case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[38].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[39].textContent.replace(',', '')):
+          browser.runtime.sendMessage('wof3');
+          break;
+        case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[39].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[40].textContent.replace(',', '')):
+          browser.runtime.sendMessage('wof2');
+          break;
+        case wofBonusDiv == null && parseFloat(document.getElementsByClassName("reward_dollar_value_style")[40].textContent.replace(',', '')) > rp && rp >= parseFloat(document.getElementsByClassName("reward_dollar_value_style")[41].textContent.replace(',', '')):
+          browser.runtime.sendMessage('wof1');
+          break;
+        default:
+          var noRP = false;
+          for (var i = 23; i < 41; i++) {
+
+            if (rp < parseFloat(document.getElementsByClassName("reward_dollar_value_style")[i].textContent.replace(',', ''))) {
+              console.log('rp < bonus');
+              noRP = true;
             }
           }
-          if(!noRP.contains(false)){
+          if (noRP==true) {
             console.log("RP too low to claim any bonuses!");
           }
-break;
-    }
+          break;
+      }
+    }, 2000);
     }
     // if free roll button visable
    else if (fpbtn_elem && fpbtn_elem.style.display == "") {
     if (captcha_elem && captcha_elem.style.display == "") {
-      browser.runtime.sendMessage("captcha");
+      browser.runtime.sendMessage("captcha"); 
       console.log("captcha");
     } else {
       browser.runtime.sendMessage('roll'); //send free play roll to bg
@@ -184,9 +189,9 @@ break;
 
 //update vars
 function update() {
-  btcbal_ = btcbal_elem ? btcbal_elem.innerHTML : "0.00000000";
-  rpbal_ = rpbal_elem ? rpbal_elem : "0";
-  countdown_ = countdown_elem ? countdown_elem.innerHTML : "0";
+ var btcbal_ = btcbal_elem ? btcbal_elem.innerHTML : "0.00000000";
+ var rpbal_ = rpbal_elem ? rpbal_elem : "0";
+ var countdown_ = countdown_elem ? countdown_elem.innerHTML : "0";
 
   if (btcbal !== btcbal_elem && btcbal !== btcbal_) {
     btcbal = btcbal_;

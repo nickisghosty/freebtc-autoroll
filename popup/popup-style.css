@@ -6,7 +6,7 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-:link{font-style:none ;}
+:link, :visited, :focus{font-style:none ;color:#ccc;background-color:#883333;}
 
 body, html {
   text-align: center;

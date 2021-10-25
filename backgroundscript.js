@@ -7,17 +7,17 @@ var isOpen = [],
   state = "",
   countdown = '',
   btcbal = '',
-  _freeBTCBonus = true,
+  _freeBTCBonus = false,
   _lottoBonus = false,
-  _funBonus = true,
+  _funBonus = false,
   _wofBonus = false,
 _randomDelay = true,
 _valueDelay = false;
 set("btcclaimed", parseFloat(0));
 set("rpclaimed", parseFloat(0));
-set("freebtcbonus", true);
+set("freebtcbonus", false);
 set("lottobonus", false);
-set("funbonus", true);
+set("funbonus", false);
 set("wofbonus", false);
 set("randomdelay", true);
 set("valuedelay", false);
