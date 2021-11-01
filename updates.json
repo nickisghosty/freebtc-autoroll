@@ -1,0 +1,76 @@
+{
+    "addons": {
+        "{abcd1234-1abc-1234-12ab-abcdef123456}": {
+            "updates": [{
+                    "version": "1.5",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/1.5/freebtc-autoroll-1.5.xpi"
+                },
+                {
+                    "version": "2.0",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/2.0/freebtc-autoroll-2.0.xpi"
+                },
+                {
+                    "version": "2.2",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/2.2/freebtc-autoroll-2.2.xpi"
+                },
+                {
+                    "version": "2.3",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/2.3/freebtc-autoroll-2.3.xpi"
+                },
+                {
+                    "version": "3.0",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.0/freebtc-autoroll-3.0.xpi"
+                },
+                {
+                    "version": "3.1",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.1/freebtc-autoroll-3.1.xpi"
+                },
+                 {
+                    "version": "3.2",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.2/freebtc-autoroll-3.2.xpi"
+                },
+                {
+                    "version": "3.3",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.3/freebtc-autoroll-3.3.xpi"
+                },
+                {
+                    "version": "3.4",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.4/freebtc-autoroll-3.4.xpi"
+                },
+                {
+                    "version": "3.5.1",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.5.1/freebtc-autoroll-3.5.1.xpi"
+                },
+                {
+                    "version": "3.6.1",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.1/freebtc-autoroll-3.6.1.xpi"
+                },
+                {
+                    "version": "3.6.3",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.3/freebtc-autoroll-3.6.3.xpi"
+                },
+                {
+                    "version": "3.6.4",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.4/freebtc-autoroll-3.6.4.xpi"
+                },
+                {
+                    "version": "3.6.5",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.5/freebtc-autoroll-3.6.5.xpi"
+                },
+                {
+                    "version": "3.6.6",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.6/freebtc-autoroll-3.6.6.xpi"
+                },
+                {
+                    "version": "3.6.7",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.7/freebtc-autoroll-3.6.7.xpi"
+                },
+                {
+                    "version": "4.2.0",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/latest/freebtc-autoroll-nickisghosty.xpi"
+                }
+
+            ]
+        }
+    }
+}
