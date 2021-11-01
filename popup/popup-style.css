@@ -1,276 +1,344 @@
 * {
-  margin: 0;
-  background-color:#333;
-  padding: 0;
-  border: 0;
-  font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    background-color: #333;
+    padding: 0;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-:link, :visited, :focus{font-style:none ;color:#ccc;background-color:#883333;}
+:link,
+:visited,
+:focus {
+    font-style: none;
+    color: #ccc;
+    background-color: #883333;
+}
 
-body, html {
-  text-align: center;
-  min-width:320px;
+body,
+html {
+    text-align: center;
+    min-width: 320px;
+}
+#delaySeconds{
+    width:50px;
 }
 table.table {
-  margin-left: auto;
-  margin-right: auto;
+    margin-left: auto;
+    margin-right: auto;
 }
-.tabs, .tab{
-  display:inline-block;
-  margin-left:auto;margin-right: auto;
-}
-span{
-  background-color:#883333;
-  vertical-align: middle;
 
-  height:30px;
-  display:inline-block;
+.tabs,
+.tab {
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
 }
-.tab{
-  padding:10px,5px;
-  text-align: center;
-  vertical-align: middle;
-  padding-top:10px;
-  width:25%;
-  height:35px;
-  background-color:#333;
-  color:#666;
-}.tab.active, .tab:active {
-  background-color:#444;
-  color:#aaa
+
+td div span{
+    height:30px;
 }
-.tab:hover{
-  background-color:#555;
-  color:#fff;
+
+span {
+    background-color: #883333;
+
+    display: inline-block;
 }
-.tabs:link, .tab:link, .tabs:visited, .tab:visited, .tabs:focus, .tab:focus, .tabs:any-link, .tab:any-link{
-  color:#666;
+
+.tab {
+    padding: 10px, 5px;
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 10px;
+    width: 25%;
+    height: 35px;
+    background-color: #333;
+    color: #666;
 }
-#countdown{ background-color: #883333;
-  border-top: 1px solid #000333;
-  padding: 8px 16px;
-  font-size: 12px;
-  margin-left:auto;margin-right:auto;
-  width:90%;
-  font-weight: bold;
-  color: #666;
-  margin-top: 10px;
-  align-items: center;
-  align-self: center;
-  align-content: center;
-  text-align: center;
-  display: block;
-} .tabs{
-  background-color: #883333;
-  border-top: 1px solid #000333;
-  padding: 8px 16px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #666;
-  margin-top: 10px;
-  margin-left:auto;margin-right:auto;
-  text-align: center;
-  display: block;
+
+.tab.active,
+.tab:active {
+    background-color: #444;
+    color: #aaa
 }
-.tab-content{
-  display:none;
-  text-align:center;
+
+.tab:hover {
+    background-color: #555;
+    color: #fff;
 }
-.tab-content.active{
- display:block;
+
+.tabs:link,
+.tab:link,
+.tabs:visited,
+.tab:visited,
+.tabs:focus,
+.tab:focus,
+.tabs:any-link,
+.tab:any-link {
+    color: #666;
 }
+
+#countdown {
+    background-color: #883333;
+    border-top: 1px solid #000333;
+    padding: 8px 16px;
+    font-size: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 90%;
+    font-weight: bold;
+    color: #666;
+    margin-top: 10px;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    text-align: center;
+    display: block;
+}
+
+.tabs {
+    background-color: #883333;
+    border-top: 1px solid #000333;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: block;
+}
+
+.tab-content {
+    display: none;
+    text-align: center;
+}
+
+.tab-content.active {
+    display: block;
+}
+
 #toggle {
-  display: block;
-  margin: auto;
-  margin-bottom: 15px;
-  text-align: center;
-  align-self:center;align-content: center;align-items: center;
-  background-color:#333;
-  margin-top: 5px;
+    display: block;
+    margin: auto;
+    margin-bottom: 15px;
+    text-align: center;
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    background-color: #333;
+    margin-top: 5px;
 }
 
 #status {
-  color: #883333;
-  font-weight: bold;
-  text-align: center;
-  padding-bottom: 0;
-  padding-top: 10px;
-  font-size: 11px;
-  transition: all 0.1s ease;
-  margin:auto;
-  align-items: center;align-content: center;align-self: center;
+    color: #883333;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 0;
+    padding-top: 10px;
+    font-size: 11px;
+    transition: all 0.1s ease;
+    margin: auto;
+    align-items: center;
+    align-content: center;
+    align-self: center;
+}
+#state{
+    font-size:14px;
+        color: #883333;
+
+        font-weight:bold;
+        margin:auto;
+        text-align:center;
+
 }
 
 #container {
-  background-color: #333;
-  min-height:300px;
-  display: block;
-  text-align: center;
-  align-items: center;
-  align-self: center;
-  align-content: center;
-  min-width: 320px;
-  overflow:hidden;
+    background-color: #333;
+    min-height: 300px;
+    display: block;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    min-width: 320px;
+    overflow: hidden;
 
 }
-.tab-content{
-  background-color: #333;
-  text-align: center;
-  align-items: center;
-  align-self: center;
-  align-content: center;
-  width:100%;
-  min-width:320px;
-  height:100%;
+
+.tab-content {
+    background-color: #333;
+    text-align: center;
+    align-items: center;
+    align-self: center;
+    align-content: center;
+    width: 100%;
+    min-width: 320px;
+    height: 100%;
 }
 
 .table {
-  align-content: center;
-  align-items: center;
-  align-self: center;
-  margin:auto;
-  margin-bottom:15px;
-  padding-bottom:5px;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    margin: auto;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
 }
 
-#btcbal {
-  background-color: #883333;
+#btcBal {
+    background-color: #883333;
 
-  display:  block;
-}
-
-#rpbal {
-  background-color: #883333;
-
-  display:  block; 
-}
-tr{
-  padding:10px;
-  margin:10px;
-}
-td{
-  background-color: #883333;
-  border-top: 1px solid #000333;
-  padding: 35px 56px;
-  font-size: 12px;
-  font-weight: bold;
-  color: #666;
-  margin-top: 10px;
-  text-align: center;
+    display: block;
 }
 
-#btcclaimed {
-  background-color: #883333;
+#rpBal {
+    background-color: #883333;
 
-  display:  block;
-  
+    display: block;
 }
-td{
-  padding:10px;
-}
-#rpclaimed {
-  background-color: #883333;
 
-  display: block;    
-}.checkbox-container input, .checkbox-container div, .checkbox-container label {
-  text-align:right;
-  align-items:end;
-  align-self:end;
-  align-content: end;
-  margin-left:10px;
-  padding:10px;
+tr {
+    padding: 10px;
+    margin: 10px;
 }
+
+td {
+    background-color: #883333;
+    border-top: 1px solid #000333;
+    padding: 35px 56px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#fpRolls {
+    background-color: #883333;
+
+    display: block;
+
+}
+
+td {
+    padding: 10px;
+}
+
+#bonusesClaimed {
+    background-color: #883333;
+
+    display: block;
+}
+
+.checkbox-container input,
+.checkbox-container div,
+.checkbox-container label {
+    text-align: right;
+    align-items: end;
+    align-self: end;
+    align-content: end;
+    margin-left: 10px;
+    padding: 10px;
+}
+
 .checkbox-container {
-	display: inline-block;
-	position: relative;
-  margin:auto;
-  background-color: #883333;
-  height:30px;
-  text-align: right;
-  align-content:end;
-  align-items: end;
-  align-self:end;
-  right:0;
+    display: inline-block;
+    position: relative;
+    margin: auto;
+    background-color: #883333;
+    height: 30px;
+    text-align: right;
+    align-content: end;
+    align-items: end;
+    align-self: end;
+    right: 0;
 }
 
 .checkbox-container label {
-	background-color: #ccc;
-	border: 1px solid #fff;
-	border-radius: 20px;
-	display: inline-block;
-	position: relative;
-	width: 45px;
-	height: 25px;
-	z-index: 2;
-  text-align: right;
-  align-content:end;
-  align-items: end;
-  align-self:end;
-  right:0;
+    background-color: #ccc;
+    border: 1px solid #fff;
+    border-radius: 20px;
+    display: inline-block;
+    position: relative;
+    width: 45px;
+    height: 25px;
+    z-index: 2;
+    text-align: right;
+    align-content: end;
+    align-items: end;
+    align-self: end;
+    right: 0;
 }
-#status_container{ background-color:#333;
-  text-align:center;
-  margin:auto;
+
+#status_container {
+    background-color: #333;
+    text-align: center;
+    margin: auto;
 }
 
 .checkbox-container label::after {
-	content: ' ';
-	background-color: #fff;
-	border-radius: 50%;
-	position: absolute;
-	top: 1.5px;
-	left: 1px;
-	transform: translateX(0);
-	transition: transform 0.3s linear;
-	width: 20px;
-	height: 20px;
-	z-index: 3;
+    content: ' ';
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 1.5px;
+    left: 1px;
+    transform: translateX(0);
+    transition: transform 0.3s linear;
+    width: 20px;
+    height: 20px;
+    z-index: 3;
 }
-input{
-  padding:5px;
+
+input {
+    padding: 5px;
 }
+
 .checkbox-container input {
-	visibility: hidden;
-	position: absolute;
-	z-index: 2;
+    visibility: hidden;
+    position: absolute;
+    z-index: 2;
 }
 
 
-.checkbox-container input:checked + label::after {
-	transform: translateX(calc(100% + 0.5px));
+.checkbox-container input:checked+label::after {
+    transform: translateX(calc(100% + 0.5px));
 }
 
 .active-circle {
-	border-radius: 50%;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(calc(-50% - 10px), calc(-50% - 2px)) scale(0);
-	transition: transform 0.6s ease-out;
-	width: 30px;
-	height: 30px;
-	z-index: 1;
-  
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(calc(-50% - 10px), calc(-50% - 2px)) scale(0);
+    transition: transform 0.6s ease-out;
+    width: 30px;
+    height: 30px;
+    z-index: 1;
+
 }
 
 .checkbox-container .active-circle,
-.checkbox-container input:checked + label {
-	background-color: #883333;
+.checkbox-container input:checked+label {
+    background-color: #883333;
 }
 
 
-input number {width:20px;}
+input number {
+    width: 20px;
+}
+
 /* The slider */
 
-#delayvalue{
-  width:50px;
+#delayValue {
+    width: 50px;
 }
 
-label{
-  background-color: #883333;
-  margin:auto;
-  padding:5px;
+label {
+    background-color: #883333;
+    margin: auto;
+    padding: 5px;
 
 
 }

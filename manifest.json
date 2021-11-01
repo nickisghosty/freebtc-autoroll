@@ -1,11 +1,13 @@
 {
   "manifest_version": 2,
   "name": "Freebitco.in Automated",
-  "version": "3.6.7",
-  "description": "Automatically clicks 'Roll' to claim your hourly satoshi + claims RP bonus if able",
+  "version": "4.2.0",
+  "description": "Automatically clicks 'Roll' to claim your hourly satoshi + claims the highest selected bonuses given the RP available.",
   "browser_specific_settings": {
     "gecko": {
-      "id": "nickisghosty@gmail.com"
+      "id": "nickisghosty@gmail.com",
+         "update_url": "https://github.com/nickisghosty/freebtc-autoroll/raw/master/updates.json"
+         
     }
   },
 
@@ -26,7 +28,7 @@
 
   "content_scripts": [{
     "matches": ["*://freebitco.in/*"],
-    "js": ["browser-polyfill.js", "contentscript.js", "ad.js"],
+    "js": ["browser-polyfill.js", "contentscript.js"],
     "all_frames": true
   }],
 

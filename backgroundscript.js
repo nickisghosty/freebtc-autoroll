@@ -1,304 +1,238 @@
-/*jshint esversion:6 */
-var isOpen = [],
-  open,
-  rpclaimed = 0,
-  btcclaimed = 0,
-  rpbal = '',
-  state = "",
-  countdown = '',
-  btcbal = '',
-  _freeBTCBonus = false,
-  _lottoBonus = false,
-  _funBonus = false,
-  _wofBonus = false,
-_randomDelay = true,
-_valueDelay = false;
-set("btcclaimed", parseFloat(0));
-set("rpclaimed", parseFloat(0));
-set("freebtcbonus", false);
-set("lottobonus", false);
-set("funbonus", false);
-set("wofbonus", false);
-set("randomdelay", true);
-set("valuedelay", false);
+/*jshint esversion: 6 */
+var _countdown = 0,
+    _status = true,
+    _fpRolls = 0,
+    _btcBal = 0,
+    _bonusesClaimed = 0,
+    _randomDelay = true,
+    _delaySeconds = 0,
+    _valueDelay = false,
+    _freeBTC = false,
+    _rpBal = 0,
+    _lotto = false,
+    _funTokens = false,
+    _wof = false,
+    _bonuses = {};
 
-function logTabs(tabs) {
-  for (let tab of tabs) {
-    const taburl = tab.url;
-    // tab.url requires the `tabs` permission or a matching host permission.
-    if (
-      taburl.indexOf('freebitco.in') !== -1 ||
-      taburl.includes('freebitco.in')
-    ) {
-      isOpen.push(true);
-    } else {
-      isOpen.push(false);
-    }
-  }
-  if (isOpen.includes(true) || isOpen.indexOf(true) !== -1) {
-    open = true;
-  } else {
-    browser.tabs.create({
-      url: 'https://freebitco.in/?op=home'
-    });
-    open = true;
-    console.log(open);
-  }
-}
+set("_status", _status);
+set("_randomDelay",_randomDelay);
+set("_valueDelay", _valueDelay);
+set("_delaySeconds",_delaySeconds);
+set("_freeBTC",_freeBTC);
+set("_lotto",_lotto);
+set("_funTokens",_funTokens);
+set("_wof", _wof);
+set("_countdown", 0);
+set("_fpRolls", 0);
+set("_btcBal", 0);
+set("_rpBal", 0);
+set("_bonusesClaimed", 0);
 openIfNeeded();
 
-function onError(error) {
-  console.log(`Error: ${error}`);
-}
-
-function onRemoved(tab) {
-  console.log(`Removed tab: ${tab.id}`);
-  openIfNeeded();
-  isOpen = [];
-}
-
-function onCreated(tab) {
-  console.log(`Created new tab: ${tab.id}`);
-}
-
-function openIfNeeded() {
-  let querying = browser.tabs.query({});
-  querying.then(logTabs, onError);
-  isOpen = [];
-  setTimeout(() => {
-    openIfNeeded();
-  }, ((Math.random() * 1000) * 20) + 1000);
-}
-// Send data to tabs
-function sendData(send, callback) {
-  if (callback == null) callback = () => {};
-  browser.tabs
-    .query({
-      url: '*://*.freebitco.in/*'
-    })
-    .then(tabs => {
-      for (let tab of tabs) {
-        browser.tabs
-          .sendMessage(tab.id, send)
-          .then(function (response) {
-            callback(response);
-          })
-          .catch(function (error) {
-            console.error(`Error: ${error}`);
-          });
-      }
-    })
-    .catch(error => {
-      console.error(`Error: ${error}`);
+browser.runtime.onConnect.addListener((port) => {
+    console.assert(port.name === "freebtc-port");
+    port.onMessage.addListener((msg) => {
+        if (msg.message === 'set') {
+            console.log(`msg : ${msg.message}`);
+            switch (true) {
+                case msg.value._countdown !== _countdown:
+                    _countdown = msg.value._countdown;
+                    set("_countdown", _countdown);
+                    if (_countdown === 0 || _countdown === "0") {
+                        get('_freeBTC');
+                        get('_lotto');
+                        get('funTokens');
+                        get('_wof');
+                        if (_freeBTC == true) {
+                            bonuses._freeBTC = true;
+                        } else if (_freeBTC == false) {
+                            bonuses._freeBTC = false;
+                        }
+                        if (_lotto == true) {
+                            bonuses._lotto = true;
+                        } else if (_lotto == false) {
+                            bonuses._lotto = false;
+                        }
+                        if (_funTokens == true) {
+                            bonuses._funTokens = true;
+                        } else if (_funTokens == false) {
+                            bonuses._funTokens = false;
+                        }
+                        if (_wof == true) {
+                            bonuses._wof = true;
+                        } else if (_wof == false) {
+                            bonuses._wof = false;
+                        }
+                        if (_status) {
+                            port.postMessage({
+                                message: 'roll', value: bonuses
+                            
+                            });
+                        }
+                    }
+                    break;
+                case msg.value._btcBal !== _btcBal:
+                    _btcBal = msg.value._btcBal;
+                    set('_btcBal', _btcBal);
+                    break;
+                case msg.value._rpBal !== _rpBal:
+                    _rpBal = msg.value._rpBal;
+                    set('_rpBal', _rpBal);
+                    break;
+            }
+            
+        }
+        else if (msg.message === 'get') {
+            get('_freeBTC');
+            get('_lotto');
+            get('_funTokens');
+            get('_status');
+            get('_wof');
+            port.postMessage({
+                message: 'set', value: {
+                    '_status': _status,
+                    '_freeBTC': _freeBTC,
+                    '_lotto': _lotto,
+                    '_funTokens': _funTokens,
+                    '_wof': _wof,
+                    '_randomDelay': _randomDelay,
+                    '_valueDelay': _valueDelay,
+                    '_delaySeconds': _delaySeconds
+                }
+            });
+        }
+        else if (msg.message === 'roll') {
+            get('_fpRolls');
+            _fpRolls++;
+            set('_fpRolls', _fpRolls);
+        }
+        else if (msg.message === 'bonus') {
+            get('_bonusesClaimed');
+            _bonusesClaimed++;
+            set('_bonusesClaimed', _bonusesClaimed);
+        }
     });
-}
-
-
-// Get data from tab
-browser.runtime.onMessage.addListener(response => {
-  console.log(`response: ${response}`);
-  get("status");
-  get("freebtcbonus");
-  get("lottobonus");
-  get("funbonus");
-  get("wofbonus");
-  get("randomdelay");
-  get("valuedelay");
-  if (state == 'on') {
-    switch (true) {
-      case response == 'roll':
-        sendData('roll', null);
-        addCount();
-        break;
-      case response == 'captcha':
-        sendData('captcha', null);
-        break;
-      case (_freeBTCBonus == true) && (response == 'freebtc1000'):
-        sendData('freebtc1000', null);
-        addCountrp();
-        break;
-      case (_freeBTCBonus == true) && (response == 'freebtc500'):
-        sendData('freebtc500', null);
-        addCountrp();
-
-        break;
-      case (_freeBTCBonus == true) && (response == 'freebtc100'):
-        sendData('freebtc100', null);
-        addCountrp();
-
-        break;
-      case (_lottoBonus == true) && (response == 'lotto100'):
-        sendData('lotto100', null);
-        addCountrp();
-
-        break;
-      case (_lottoBonus == true) && (response == 'lotto50'):
-        sendData('lotto50', null);
-        addCountrp();
-
-        break;
-      case (_lottoBonus == true) && (response == 'lotto25'):
-        sendData('lotto25', null);
-        addCountrp();
-
-        break;
-      case (_funBonus == true) && (response == 'fun5'):
-        sendData('fun5', null);
-        addCountrp();
-
-        break;
-      case (_funBonus == true) && (response == 'fun4'):
-        sendData('fun4', null);
-        addCountrp();
-
-        break;
-      case (_funBonus == true) && (response == 'fun3'):
-        sendData('fun3', null);
-        addCountrp();
-
-        break;
-      case (_funBonus == true) && (response == 'fun2'):
-        sendData('fun2', null);
-        addCountrp();
-
-        break;
-      case (_funBonus == true) && (response == 'fun1'):
-        sendData('fun1', null);
-        addCountrp();
-
-        break;
-      case (_wofBonus == true) && (response == 'wof5'):
-        sendData('wof5', null);
-        addCountrp();
-
-        break;
-      case (_wofBonus == true) && (response == 'wof4'):
-        sendData('wof4', null);
-        addCountrp();
-
-        break;
-      case (_wofBonus == true) && (response == 'wof3'):
-        sendData('wof3', null);
-        addCountrp();
-
-        break;
-      case (_wofBonus == true) && (response == 'wof2'):
-        sendData('wof2', null);
-        addCountrp();
-
-        break;
-      case (_wofBonus == true) && (response == 'wof1'):
-        sendData('wof1', null);
-        addCountrp();
-
-        break;
-      case (_randomDelay == true) && (response == "randomdelay"):
-        sendData('randomdelay', null);
-        break;
-      case (_valueDelay == true) && (response == "valuedelay"):
-        sendData('valuedelay', null);
-        break;
-      default:
-        if (response.btcbal) {
-          console.log(`response: ${response.btcbal}`);
-          console.log(`set new balance: ${response.btcbal}`);
-          set("btcbal", response.btcbal);
-        }
-        if (response.rpbal) {
-          console.log(`response: ${response.rpbal}`);
-          console.log(`set new rp balance: ${response.rpbal}`);
-          set("rpbal", response.rpbal);
-        }
-        if (response.countdown) {
-          set("countdown", response.countdown);
-        }
-    }
-  }
-
 });
 
 
 function set(item, value) {
-  var setter = browser.storage.local.set({
-    [item]: value
-  }).then(() => {
-    console.log(`Set ${item} : ${value}`);
-  }, onError);
+    const setter = browser.storage.local.set({
+        [item]: value
+    }).then(() => {
+        console.log(`Set ${item} : ${value}`);
+    }, onError);
 }
-
 function get(item) {
-  var getter = browser.storage.local.get(item.toString()).then(result => {
+    const getter = browser.storage.local.get(item.toString()).then(result => {
 
-    let value = result[item];
+        const value = result[item];
 
-    console.log(value);
-    got(item, value);
-  }, onError);
+        console.log(`get ${item} : ${value}`);
+        got(item, value);
+    }, onError);
 
 }
 
 function got(item, value) {
-  switch (item) {
-    case "status":
-      state = value;
-      break;
-    case "btcbal":
-      btcbal = value;
-      break;
-    case "rpbal":
-      rpbal = value;
-      break;
-    case "btcclaimed":
-      btcclaimed = value;
-      break;
-    case "rpclaimed":
-      rpclaimed = value;
-      break;
-    case "countdown":
-      countdown = value;
-      break;
-    case "freebtcbonus":
-      _freeBTCBonus = value;
-      break;
-    case "lottobonus":
-      _lottoBonus = value;
-      break;
-    case "funbonus":
-      _funBonus = value;
-      break;
-    case "wofbonus":
-      _wofBonus = value;
-      break;
-    case "randomdelay":
-      _randomDelay = value;
-      break;
-    case "valuedelay":
-      _valueDelay = value;
-      break;
-  }
+    console.log(`bg: got ${item} value: ${value}`);
+    switch (item) {
+        case '_status':
+            _status = value;
+            break;
+        case '_randomDelay':
+            _randomDelay = value;
+            break;
+        case '_delaySeconds':
+            _delaySeconds = value;
+            break;
+        case '_rpBal':
+            _rpBal = value;
+            break;
+        case '_btcBal':
+            _btcBal = value;
+            break;
+        case '_countdown':
+            _countdown = value;
+            break;
+        case '_valueDelay':
+            _valueDelay = value;
+            break;
+        case '_freeBTC':
+            _freeBTC = value;
+            break;
+        case '_lotto':
+            _lotto = value;
+            break;
+        case '_funTokens':
+            _funTokens = value;
+            break;
+        case '_wof':
+            _wof = value;
+            break;
+    }
+    
 }
 
-function onError(err) {
-  console.log(`Error: ${err}`);
+function logTabs(tabs) {
+    for (let tab of tabs) {
+        const taburl = tab.url;
+        // tab.url requires the `tabs` permission or a matching host permission.
+        if (
+            taburl.indexOf('freebitco.in') !== -1 ||
+            taburl.includes('freebitco.in')
+        ) {
+            isOpen.push(true);
+        } else {
+            isOpen.push(false);
+        }
+    }
+    if (isOpen.includes(true) || isOpen.indexOf(true) !== -1) {
+        open = true;
+    } else {
+        browser.tabs.create({
+            url: 'https://freebitco.in/?op=home'
+        });
+        open = true;
+        console.log(open);
+    }
+}
+function onRemoved(tab) {
+    console.log(`Removed tab: ${tab.id}`);
+    openIfNeeded();
+    isOpen = [];
 }
 
-
-
-// Count get and set
-function addCount() {
-  get("btcclaimed");
-  set("btcclaimed", btcclaimed + 1);
-
+function onCreated(tab) {
+    console.log(`Created new tab: ${tab.id}`);
 }
 
-function addCountrp() {
-  get("rpclaimed");
-  set("rpclaimed", rpclaimed + 1);
-
+function openIfNeeded() {
+    let querying = browser.tabs.query({});
+    querying.then(logTabs, onError);
+    isOpen = [];
+    setTimeout(() => {
+        openIfNeeded();
+    }, ((Math.random() * 1000) * 20) + 1000);
 }
 
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+setInterval(update, 1000);
 
+function update() {
+    get("_status");
 
-
-// Set initial status
-set("status", "on");
+    if (_status) {
+        get("_randomDelay");
+        get("_valueDelay");
+        get("_delaySeconds");
+        get("_rpBal");
+        get("_btcBal");
+        get("_countdown");
+        get("_freeBTC");
+        get("_lotto");
+        get("_funTokens");
+        get("_wof");
+    }
+}

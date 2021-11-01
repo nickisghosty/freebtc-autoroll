@@ -1,271 +1,263 @@
-/*jshint esversion: 11*/
-const status_ck = document.getElementById("status_ck"),
- randomDelay = document.getElementById('randomdelay'),
- valueDelay = document.getElementById('valuedelay'),
- delayValue = document.getElementById('delayvalue'),
- freeBTCBonus = document.getElementById('freebtc'),
- lottoBonus = document.getElementById('lotto'),
- funBonus = document.getElementById('funtokens'),
- wofBonus = document.getElementById('wof');
 
-var countdown = '',
- btcclaimed = 0,
- rpbal = '',
+/*jshint esversion: 6 */
 
- rpclaimed = 0,
- state = "",
- _freeBTCBonus = true,
- _lottoBonus = false,
- _funBonus = true,
- _wofBonus = false,
- _randomDelay = true,
- _valueDelay = false,
- _delayValue=0,
- btcbal = '';
+const countdownElem = document.getElementById("countdownValue"),
+    stateElem = document.getElementById("state"),
+    statusElem = document.getElementById("status"),
+    fpRollsElem = document.getElementById("fpRollsValue"),
+    btcBalElem = document.getElementById("btcBalValue"),
+    rpBalElem = document.getElementById("rpBalValue"),
+    bonusesClaimedElem = document.getElementById("bonusesClaimedValue"),
+    randomDelayElem = document.getElementById("randomDelay"),
+    delaySecondsElem = document.getElementById("delaySeconds"),
+    valueDelayElem = document.getElementById("valueDelay"),
+    freeBTCElem = document.getElementById("freeBTC"),
+    lottoElem = document.getElementById("lotto"),
+    funTokensElem = document.getElementById("funTokens"),
+    wofElem = document.getElementById("wof");
 
+var _countdown=0,
+    _status = false,
+    _fpRolls=0,
+    _btcBal = 0.00000000,
+    _rpBal = 0,
+    _bonusesClaimed=0,
+    _randomDelay = true,
+    _delaySeconds = 0,
+    _valueDelay=false,
+    _freeBTC=false,
+    _lotto=false,
+    _funTokens=false,
+    _wof=false;
+    
 
-
-const regex = /\d+\D\W\d+\D/;
-
-const regtime = () => {
-  get("countdown");
-  const cd = countdown.toString();
-  return cd.match(regex);
+statusElem.onchange = () => {
+    
+    let value;
+    value = statusElem.checked;
+    if (value == true) {
+        _status = true;
+        stateElem.textContent = "ON";
+    }
+    else {
+        _status = false;
+        stateElem.textContent = "OFF";
+    }
+    set("_status", _status);
+    console.log(`status set to: ${value}`);
 };
-window.onclick=function(e){
-  var target = e.target;
-  if(target.matches('.tab')){
-    Array.from(document.querySelectorAll('.active')).forEach(function(el) { 
-      el.classList.remove('active');
-  });
+randomDelayElem.onclick = () => {
+    let value;
+    let value2; 
+    value = randomDelayElem.checked === true ? true : false;
+    value2 = valueDelayElem.checked === false ? false : true;
+    if (value === true) {
+        set("_delaySeconds", 0);
+    }
+    set("_randomDelay", value);
+    set("_valueDelay", value2);
+};
+valueDelayElem.onclick = () => {
+    let value;
+    let value2;
+    value = valueDelayElem.checked === true ? true : false;
+    value2 = randomDelayElem.checked === false ? false : true;
+    if (value2 === true) {
+        set("_delaySeconds", 0);
+    }
+    set("_valueDelay", value);
+    set("_randomDelay", value2);
+};
+freeBTCElem.onchange = () => {
+    let value;
+    value = freeBTCElem.checked === true ? true : false;
+    set("_freeBTC", value);
+};
+lottoElem.onchange = () => {
+    let value;
+    value = lottoElem.checked === true ? true : false;
+    set("_lotto", value);
+};
+funTokensElem.onchange = () => {
+    let value;
+    value = funTokensElem.checked === true ? true : false;
+    set("_funTokens", value);
+};
+wofElem.onchange = () => {
+    let value;
+    value = wofElem.checked === true ? true : false;
+    set("_wof", value);
+};
+delaySecondsElem.onchange = () => {
+    let value;
+    value = delaySecondsElem.value;
+    if (_valueDelay === true) {
+        set("_delaySeconds", value);
+    }
+};
 
-    var clicked = e.target.id;
-    var element = document.getElementById(clicked);
-    element.classList.add('active');
-    var tabcontent = `${clicked}-content`;
-    var contentelement = document.getElementById(tabcontent);
-    contentelement.classList.add('active');
-  }
+window.onclick = (e) => {
+    let target = e.target;
+    if (target.matches('.tab')) {
+        Array.from(document.querySelectorAll('.active')).forEach((el) => {
+            el.classList.remove('active');
+        });
+
+        let clicked = e.target.id;
+        let element = document.getElementById(clicked);
+        element.classList.add('active');
+        let tabcontent = `${clicked}-content`;
+        let contentelement = document.getElementById(tabcontent);
+        contentelement.classList.add('active');
+    }
 };
 function set(item, value) {
-  var setter = browser.storage.local.set({
-    [item]: value
-  }).then(() => {
-    console.log(`Set ${item} : ${value}`);
-  }, onError);
+    const setter = browser.storage.local.set({
+        [item]: value
+    }).then(() => {
+        console.log(`Set ${item} : ${value}`);
+    }, onError);
 }
+function get(item)  {
+    const getter = browser.storage.local.get(item.toString()).then(result => {
 
-function get(item) {
-  var getter = browser.storage.local.get(item.toString()).then(result => { 
-  
-    let value = result[item];
+        const value = result[item];
 
-    console.log(`got ${item} : ${value}`);
-    got(item,value);
-  },onError);
+        console.log(`get ${item} : ${value}`);
+        got(item, value);
+    }, onError);
 
 }
 function got(item, value) {
-  switch (item) {
-    case "status":
-      state = value;
-      break;
-    case "btcbal":
-      btcbal = value;
-      break;
-    case "rpbal":
-      rpbal = value;
-      break;
-    case "btcclaimed":
-      btcclaimed = value;
-      break;
-    case "rpclaimed":
-      rpclaimed = value;
-      break;
-    case "countdown":
-      countdown = value;
-      break;
-      case "freebtcbonus":
-        _freeBTCBonus = value;
-        break;
-        case "lottobonus":
-          _lottoBonus = value;
-          break;
-          case "funbonus":
-            _funBonus = value;
+    console.log(`got: item ${item} value ${value}`);
+    switch (item) {
+        case "_status":
+            _status = value;
             break;
-            case "wofbonus":
-              _wofBonus = value;
-              break;
-              case "randomdelay":
-                _randomDelay = value;
-                break;
-                case "valuedelay":
-                  _valueDelay = value;
-                  break;
-                  case "delayvalue":
-                    _delayValue = value;
-  }
-}
-function onError(err) {
-  console.log(`Error: ${err}`);
-}
-
-
-// Refresh text ON/OFF
-function refreshStatusText() {
-  if (state == "off") {
-    document.getElementById("status").textContent = "OFF";
-    document.getElementById("status").style.color = "#ccc";
-    status_ck.checked = false;
-  } else {
-    document.getElementById("status").textContent = "ON";
-    document.getElementById("status").style.color = "#803333";
-    status_ck.checked = true;
-  }
-  if(_freeBTCBonus == true){
-    freeBTCBonus.checked = true;
-  } else{ freeBTCBonus.checked = false; }
-  if(_lottoBonus == true){
-    lottoBonus.checked = true;
-  }else{ lottoBonus.checked = false; }
-  if(_funBonus == true){funBonus.checked = true; } else{ funBonus.checked = false; }
-  if(_wofBonus == true){wofBonus.checked = true; } else{ wofBonus.checked = false;}
-if(_valueDelay == true){valueDelay.checked = true; } else{ valueDelay.checked = false; }
-if(_randomDelay == true){randomDelay.checked = true; } else{ randomDelay.checked = false;}
+        case "_randomDelay":
+            _randomDelay = value;
+            break;
+        case "_delaySeconds":
+            _delaySeconds = value;
+            break;
+        case "_valueDelay":
+            _valueDelay = value;
+            break;
+        case "_freeBTC":
+            _freeBTC = value;
+            break;
+        case "_btcBal":
+            _btcBal = value;
+            break;
+        case "_rpBal":
+            _rpBal = value;
+            break;
+        case "_countdown":
+            _countdown = value;
+            break;
+        case "_lotto":
+            _lotto = value;
+            break;
+        case "_funTokens":
+            _funTokens = value;
+            break;
+        case "_wof":
+            _wof = value;
+            break;
+    }
 }
 
-// On change status
-status_ck.onchange = () => {
-  let value;
-  if (status_ck.checked === true) {
-    value = "on";
-  } else {
-    value = "off";
-  }
-set("status", value);
-};
-
-freeBTCBonus.onchange = () => {
-  let value;
-  if(freeBTCBonus.checked === true) {
-    value =true;
-  }else{value=false;  }
-  set("freebtcbonus", value);
-};
-lottoBonus.onchange = () => {
-  let value;
-  if(lottoBonus.checked === true) {
-    value=true;
-  } else {value=false;}
-  set("lottobonus", value);
-  
-};
-funBonus.onchange = () => {
-  let value;
-  if(funBonus.checked === true) {
-    value =true;
-  } else{
-    value=false;
-  }
-  set("funbonus", value);
-};
-wofBonus.onchange = () => {
-  let value;
-  if(wofBonus.checked === true) {
-    value= true;
-  }else{value=false;}
-  set("wofbonus", value);
-};
-randomDelay.onchange = () => {
-  let value;
-  if(randomDelay.checked === true){
-    value = true;}
-    else{value=false;}
-    set("randomdelay", value);
-  
-};
-valueDelay.onchange = () => {
-  let value;
-  if(valueDelay.checked === true){
-    value = true;} else{ value = false; }
-    set("valuedelay", value);
-  
-};
-function toggleStatus() {
-  let value;
-  if (status_ck.checked) {
-    value = "on";
-  } else {
-    value = "off";
-  }
-  set("status",value);
-
-
-refreshStatusText();
-}
-
-
-// Refresh data
-function refresh() {
-  get("btcbal");
-  get("btcclaimed");
-  get("rpbal");
-  get("rpclaimed");
-  get("status");
-  get("countdown");
-  get("freebtcbonus");
-  get("lottobonus");
-  get("funbonus");
-  get("wofbonus");
-  get("randomdelay");
-  get("valuedelay");
-   if(document.getElementById("rpbal"))document.getElementById("rpbal").textContent = `${rpbal} RP`;
- 
-  if(document.getElementById("btcbal")){document.getElementById("btcbal").textContent = `${btcbal} BTC`;}
-  if(document.getElementById("btcclaimed")){document.getElementById("btcclaimed").textContent = `Rolls: ${btcclaimed}`;}
-  if(document.getElementById("rpclaimed")){document.getElementById("rpclaimed").textContent = `Bonuses: ${rpclaimed}`;}
-  let cd = countdown.toString().match(regex);
-  if(document.getElementById(`countdown`)){document.getElementById(`countdown`).textContent = `${cd || ""} remaining`;}
-  console.log(`refresh rolls: ${btcclaimed}`);
-  console.log(`refresh btcbal: ${btcbal}`);
-  console.log(`refresh bonuses: ${rpclaimed}`);
-  console.log(`refresh rpbal: ${rpbal}`);
-  console.log(`refresh countdown: ${countdown}`);
-  console.log(`status: ${state}`);
-  console.log(`refresh _freeBTCBonus: ${_freeBTCBonus}`);
-  console.log(`refresh _lottoBonus: ${_lottoBonus}`);
-  console.log(`refresh _funBonus: ${_funBonus}`);
-  console.log(`refresh _wofBonus: ${_wofBonus}`);
-  console.log(`refresh _randomDelay: ${_randomDelay}`);
-  console.log(`refresh _valueDelay: ${_valueDelay}`);
-   refreshStatusText();
-}
-get("btcbal");
-get("btcclaimed");
-get("rpbal");
-get("rpclaimed");
-get("status");
-get("freebtcbonus");
-get("lottobonus");
-get("funbonus");
-get("wofbonus");
-
-get("randomdelay");
-get("valuedelay");
-status_ck.checked = state == "on" ? true : false;
-freeBTCBonus.checked = _freeBTCBonus == true ? true : false;
-lottoBonus.checked = _lottoBonus == true ? true : false;
-funBonus.checked = _funBonus == true ? true : false;
-wofBonus.checked = _wofBonus == true ? true : false;
-randomDelay.checked = _randomDelay == true ? true : false;
-valueDelay.checked = _valueDelay == true ? true: false;
-refreshStatusText();
-refresh();
-
-// Refresh loop (5 sec)
 setInterval(() => {
-  refresh();
-  refreshStatusText();
-
+    if (_status) {
+        refresh();
+        console.log('refresh');
+    }
 }, 250);
+function refresh() {
+    get("_status");
+    get("_randomDelay");
+    get("_valueDelay");
+    get("_delaySeconds");
+    get("_freeBTC");
+    get("_lotto");
+    get("_funTokens");
+    get("_wof");
+    get("_countdown");
+    get("_rpBal");
+    get("_btcBal");
+    get("_fpRolls");
+    get("_bonusesClaimed");
+    if (_status ==true) {
+        statusElem.checked = true;
+        stateElem.textContent = "ON";
+    }
+    else{
+        statusElem.checked = false;
+        stateElem.textContent = "OFF";
+    }
+    if (_randomDelay == true) {
+        randomDelayElem.checked = true;
+        valueDelayElem.checked = false;
+        delaySecondsElem.value = delaySeconds;
+    }
+    else {
+        randomDelayElem.checked = false;
+        valueDelayElem.checked = true;
+        delaySecondsElem.value = _delaySeconds;
+    }
+    if (_valueDelay == true) {
+        valueDelayElem.checked = true;
+        randomDelayElem.checked = false;
+        delaySecondsElem.value = _delaySeconds;
+    }
+    else {
+        valueDelayElem.checked = false;
+        randomDelayElem.checked = true;
+        delaySecondsElem.value = _delaySeconds;
+    }
+    if (_freeBTC == true) {
+        freeBTCElem.checked = true;
+    }
+    else {
+        freeBTCElem.checked = false;
+    }
+    if (_lotto == true) {
+        lottoElem.checked = true;
+    }
+    else {
+        lottoElem.checked = false;
+    }
+    if (_funTokens == true) {
+        funTokensElem.checked = true;
+    }
+    else {
+        funTokensElem.checked = false;
+    }
+    if (_wof == true) {
+        wofElem.checked = true;
+    }
+    else {
+        wofElem.checked = false;
+    }
+    if (_countdown !== countdownElem.innerText) {
+        countdownElem.innerText = _countdown;
+    }
+    if (_rpBal !== rpBalElem.innerText) {
+        rpBalElem.innerText = _rpBal.toString();
+    }
+    if (_btcBal !== btcBalElem.innerText) {
+        btcBalElem.innerText = (parseFloat(_btcBal).toFixed(8)).toString();
+    }
+    if (_fpRolls.toString() !== fpRollsElem.innerText) {
+        fpRollsElem.innerText = _fpRolls.toString();
+    }
+    if (_bonusesClaimed.toString() !== bonusesClaimedElem.innerText) {
+        bonusesClaimedElem.innerText = _bonusesClaimed.toString();
+    }
+  
+}
+function onError(error) {
+    console.log(`Error: ${error}`);
+}
+
+refresh();
