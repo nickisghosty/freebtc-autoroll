@@ -64,6 +64,10 @@
                 {
                     "version": "3.6.7",
                     "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/3.6.7/freebtc-autoroll-3.6.7.xpi"
+                },
+                {
+                    "version": "4.2.0",
+                    "update_link": "https://github.com/nickisghosty/freebtc-autoroll/releases/download/latest/freebtc-autoroll-nickisghosty.xpi"
                 }
 
             ]
