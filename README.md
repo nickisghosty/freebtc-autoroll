@@ -10,7 +10,7 @@ Then checks if you have any RP bonuses active, and if you have enough RP auto cl
 <img src="https://github.com/nickisghosty/freebtc-autoroll/raw/master/SS.png" width="200px" height="400px" data-canonical-src="https://github.com/nickisghosty/freebtc-autoroll/raw/master/SS.png" alt="" /></p
   
 <hr />
-<h2>INSTALL</h2>5
+<h2>INSTALL</h2>
 [Edge](https://microsoftedge.microsoft.com/addons/detail/freebitcoin-automated/mmmidhlgmjehopdjiinffadldiopmfck) 
 
 [Firefox](https://github.com/nickisghosty/freebtc-autoroll/releases/download/latest/freebtc-autoroll-nickisghosty.xpi) to install if clicking this link doesnt work, you may need to download the signed XPI release and drag and drop to your firefox browser window. Then the add extension pop up window will appear where you'll need to click add. (You may thank Mozilla for considering this addon to go against their acceptable use policy for supporting "illegal gambiling". Even though it had been on their add on gallery for a couple years, and just this week they decided  it went against their rules. Must be because of the updates I've been doing.)
