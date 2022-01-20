@@ -30,7 +30,6 @@ regtime = () => {
 _countdown = () => regtime()[0];
 
 
-document.getElementsByClassName("rewards_link")[0].click();
 
 setInterval(() => {
     port.postMessage({
@@ -408,84 +407,118 @@ port.onMessage.addListener(function (msg) {
     }
 
 });
+function clickRewardsTab(){
+    document.getElementsByClassName("rewards_link")[0].click();
 
+}
 
 function freeBTC1000() {
+    clickRewardsTab();
     window.wrappedJSObject.RedeemRPProduct('fp_bonus_1000');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fp_bonus_1000'));
 }
 
 function freeBTC500() {
+    clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fp_bonus_500');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fp_bonus_500'));
 }
 
 function freeBTC100() {
+    clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fp_bonus_100');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fp_bonus_100'));
 }
 
 function lotto100() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_lott_100');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_lott_100'));
 }
 
 function lotto50() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_lott_50');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_lott_50'));
 }
 
 function lotto25() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_lott_25');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_lott_25'));
 }
 
 function fun5() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fun_token_5');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fun_token_5'));
 }
 
 function fun4() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fun_token_4');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fun_token_4'));
 }
 
 function fun3() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fun_token_3');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fun_token_3'));
 }
 
 function fun2() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fun_token_2');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fun_token_2'));
 }
 
 function fun1() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('fun_token_1');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('fun_token_1'));
 }
 
 function wof5() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_wof_5');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_wof_5'));
 }
 
 function wof4() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_wof_4');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_wof_4'));
 }
 
 function wof3() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_wof_3');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_wof_3'));
 }
 
 function wof2() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_wof_2');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_wof_2'));
 }
 
 function wof1() {
+        clickRewardsTab();
+
     window.wrappedJSObject.RedeemRPProduct('free_wof_1');
     XPCNativeWrapper(window.wrappedJSObject.RedeemRPProduct('free_wof_1'));
 }
